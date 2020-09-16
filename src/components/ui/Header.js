@@ -153,7 +153,14 @@ const Header = () => {
 
   const routes = [
     { name: 'Home', link: '/', activeIndex: 0 },
-    { name: 'Services', link: '/services', activeIndex: 1 },
+    {
+      name: 'Services',
+      link: '/services',
+      activeIndex: 1,
+      ariaOwns: anchorEl ? 'simple-menu' : undefined,
+      ariaPopup: anchorEl ? 'true' : undefined,
+      mouseOver: (event) => handleClick(event),
+    },
     { name: 'The Revolution', link: '/revolution', activeIndex: 2 },
     { name: 'About Us', link: '/about', activeIndex: 3 },
     { name: 'Contact Us', link: '/contact', activeIndex: 4 },
@@ -183,57 +190,32 @@ const Header = () => {
         value={value}
         className={classes.tabContainer}
         onChange={handleChange}
-        indicatorColor='primary'
+        indicatorColor="primary"
       >
-        <Tab
-          disableRipple
-          className={classes.tab}
-          component={Link}
-          to='/'
-          label='Home'
-        />
-        <Tab
-          disableRipple
-          aria-owns={anchorEl ? 'simple-menu' : undefined}
-          aria-haspopup={anchorEl ? 'true' : undefined}
-          className={classes.tab}
-          component={Link}
-          onMouseOver={(event) => handleClick(event)}
-          to='/services'
-          label='Services'
-        />
-        <Tab
-          disableRipple
-          className={classes.tab}
-          component={Link}
-          to='/revolution'
-          label='The Revolution'
-        />
-        <Tab
-          disableRipple
-          className={classes.tab}
-          component={Link}
-          to='/about'
-          label='About Us'
-        />
-        <Tab
-          disableRipple
-          className={classes.tab}
-          component={Link}
-          to='/contact'
-          label='Contact Us'
-        />
+        {routes.map((route, index) => (
+          <Tab
+            key={`${route}${index}`}
+            disableRipple
+            className={classes.tab}
+            component={Link}
+            to={route.link}
+            label={route.name}
+            aria-owns={route.ariaOwns}
+            aria-haspopup={route.ariaPopup}
+            onMouseOver={route.mouseOver}
+          />
+        ))}
       </Tabs>
       <Button
         disableRipple
-        variant='contained'
-        color='secondary'
+        variant="contained"
+        color="secondary"
         className={classes.button}
       >
         Free Estimate
       </Button>
       <Menu
-        id='simple-menu'
+        id="simple-menu"
         anchorEl={anchorEl}
         open={openMenu}
         onClose={handleClose}
@@ -241,6 +223,7 @@ const Header = () => {
         MenuListProps={{ onMouseLeave: handleClose }}
         elevation={0}
         disableRipple
+        keepMounted
       >
         {menuOptions.map((option, i) => (
           <MenuItem
@@ -274,116 +257,31 @@ const Header = () => {
         classes={{ paper: classes.drawer }}
       >
         <List disablePadding>
-          <ListItem
-            onClick={() => {
-              setOpenDrawer(false);
-              setValue(0);
-            }}
-            divider
-            button
-            component={Link}
-            to='/'
-            selected={value === 0}
-          >
-            <ListItemText
-              className={
-                value === 0
-                  ? [classes.drawerItem, classes.drawerItemSelected]
-                  : classes.drawerItem
-              }
-              disableTypography
+          {routes.map((route) => (
+            <ListItem
+              key={`${route}${route.activeIndex}`}
+              divider
+              button
+              component={Link}
+              to={route.link}
+              selected={value === route.activeIndex}
+              onClick={() => {
+                setOpenDrawer(false);
+                setValue(route.activeIndex);
+              }}
             >
-              Home
-            </ListItemText>
-          </ListItem>
-          <ListItem
-            onClick={() => {
-              setOpenDrawer(false);
-              setValue(1);
-            }}
-            divider
-            button
-            component={Link}
-            to='/services'
-            selected={value === 1}
-          >
-            <ListItemText
-              className={
-                value === 1
-                  ? [classes.drawerItem, classes.drawerItemSelected]
-                  : classes.drawerItem
-              }
-              disableTypography
-            >
-              Services
-            </ListItemText>
-          </ListItem>
-          <ListItem
-            onClick={() => {
-              setOpenDrawer(false);
-              setValue(2);
-            }}
-            divider
-            button
-            component={Link}
-            to='/revolution'
-            selected={value === 2}
-          >
-            <ListItemText
-              className={
-                value === 2
-                  ? [classes.drawerItem, classes.drawerItemSelected]
-                  : classes.drawerItem
-              }
-              disableTypography
-            >
-              The Revolution
-            </ListItemText>
-          </ListItem>
-          <ListItem
-            onClick={() => {
-              setOpenDrawer(false);
-              setValue(3);
-            }}
-            divider
-            button
-            component={Link}
-            to='/about'
-            selected={value === 3}
-          >
-            <ListItemText
-              className={
-                value === 3
-                  ? [classes.drawerItem, classes.drawerItemSelected]
-                  : classes.drawerItem
-              }
-              disableTypography
-            >
-              About Us
-            </ListItemText>
-          </ListItem>
-          <ListItem
-            onClick={() => {
-              setOpenDrawer(false);
-              setValue(4);
-            }}
-            divider
-            button
-            component={Link}
-            to='/contact'
-            selected={value === 4}
-          >
-            <ListItemText
-              className={
-                value === 4
-                  ? [classes.drawerItem, classes.drawerItemSelected]
-                  : classes.drawerItem
-              }
-              disableTypography
-            >
-              Contact Us
-            </ListItemText>
-          </ListItem>
+              <ListItemText
+                disableTypography
+                className={
+                  value === route.activeIndex
+                    ? [classes.drawerItem, classes.drawerItemSelected]
+                    : classes.drawerItem
+                }
+              >
+                {route.name}
+              </ListItemText>
+            </ListItem>
+          ))}
           <ListItem
             onClick={() => {
               setOpenDrawer(false);
@@ -393,7 +291,7 @@ const Header = () => {
             button
             component={Link}
             className={classes.drawerItemEstimate}
-            to='/estimate'
+            to="/estimate"
             selected={value === 5}
           >
             <ListItemText
@@ -422,16 +320,16 @@ const Header = () => {
   return (
     <>
       <ElevationScroll>
-        <AppBar position='fixed'>
+        <AppBar position="fixed">
           <Toolbar disableGutters>
             <Button
               component={Link}
-              to='/'
+              to="/"
               className={classes.logoContainer}
               onClick={() => setValue(0)}
               disableRipple
             >
-              <img className={classes.logo} src={logo} alt='company_logo' />
+              <img className={classes.logo} src={logo} alt="company_logo" />
             </Button>
             {matches ? drawer : tabs}
           </Toolbar>
