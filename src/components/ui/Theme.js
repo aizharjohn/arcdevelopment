@@ -2,6 +2,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 const arcBlue = '#0b72b9';
 const arcOrange = '#ffba60';
+const arcGrey = '#868686';
 // const fontFamily = ['Roboto', 'Helvetica', 'Arial', 'sans-serif'];
 // const fontFamily1 = ['Orbitron', 'Helvetica', 'Arial', 'sans-serif'];
 
@@ -47,6 +48,21 @@ export default createMuiTheme({
       fontFamily: 'Raleway',
       fontSize: '1.75rem',
       color: arcBlue,
+      fontWeight: 700,
+    },
+    subtitle1: {
+      fontSize: '1.5rem',
+      fontWeight: 300,
+      color: arcGrey,
+    },
+    learnButton: {
+      borderColor: arcBlue,
+      borderWidth: 2,
+      textTransform: 'none',
+      color: arcBlue,
+      borderRadius: 50,
+      fontFamily: 'Roboto',
+      fontWeight: 'bold',
     },
   },
 });
