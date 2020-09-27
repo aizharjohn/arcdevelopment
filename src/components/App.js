@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './ui/Header';
 import theme from './ui/Theme';
 import Footer from './ui/Footer';
-import LandingPage from '../LandingPage';
+import LandingPage from './LandingPage';
 
 const App = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);

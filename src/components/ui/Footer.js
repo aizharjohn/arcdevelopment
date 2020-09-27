@@ -13,13 +13,13 @@ const Footer = (props) => {
   return (
     <footer className={classes.footer}>
       <Hidden mdDown>
-        <Grid container justify='center' className={classes.mainContainer}>
+        <Grid container justify="center" className={classes.mainContainer}>
           <Grid item className={classes.gridItem}>
-            <Grid container direction='column' spacing={2}>
+            <Grid container direction="column" spacing={2}>
               <Grid
                 item
                 component={Link}
-                to='/'
+                to="/"
                 onClick={() => props.setValue(0)}
                 className={classes.link}
               >
@@ -28,11 +28,11 @@ const Footer = (props) => {
             </Grid>
           </Grid>
           <Grid item className={classes.gridItem}>
-            <Grid container direction='column' spacing={2}>
+            <Grid container direction="column" spacing={2}>
               <Grid
                 item
                 component={Link}
-                to='/services'
+                to="/services"
                 onClick={() => {
                   props.setValue(1);
                   props.setSelectedIndex(0);
@@ -44,7 +44,7 @@ const Footer = (props) => {
               <Grid
                 item
                 component={Link}
-                to='/customsoftware'
+                to="/customsoftware"
                 onClick={() => {
                   props.setValue(1);
                   props.setSelectedIndex(1);
@@ -56,19 +56,19 @@ const Footer = (props) => {
               <Grid
                 item
                 component={Link}
-                to='/mobileapps'
+                to="/mobileapps"
                 onClick={() => {
                   props.setValue(1);
                   props.setSelectedIndex(2);
                 }}
                 className={classes.link}
               >
-                Mobile App Development
+                iOS/Android App Development
               </Grid>
               <Grid
                 item
                 component={Link}
-                to='/websites'
+                to="/websites"
                 onClick={() => {
                   props.setValue(1);
                   props.setSelectedIndex(3);
@@ -80,11 +80,11 @@ const Footer = (props) => {
             </Grid>
           </Grid>
           <Grid item className={classes.gridItem}>
-            <Grid container direction='column' spacing={2}>
+            <Grid container direction="column" spacing={2}>
               <Grid
                 item
                 component={Link}
-                to='/revolution'
+                to="/revolution"
                 onClick={() => props.setValue(2)}
                 className={classes.link}
               >
@@ -93,7 +93,7 @@ const Footer = (props) => {
               <Grid
                 item
                 component={Link}
-                to='/revolution'
+                to="/revolution"
                 onClick={() => props.setValue(2)}
                 className={classes.link}
               >
@@ -102,7 +102,7 @@ const Footer = (props) => {
               <Grid
                 item
                 component={Link}
-                to='/revolution'
+                to="/revolution"
                 onClick={() => props.setValue(2)}
                 className={classes.link}
               >
@@ -111,7 +111,7 @@ const Footer = (props) => {
               <Grid
                 item
                 component={Link}
-                to='/revolution'
+                to="/revolution"
                 onClick={() => props.setValue(2)}
                 className={classes.link}
               >
@@ -120,11 +120,11 @@ const Footer = (props) => {
             </Grid>
           </Grid>
           <Grid item className={classes.gridItem}>
-            <Grid container direction='column' spacing={2}>
+            <Grid container direction="column" spacing={2}>
               <Grid
                 item
                 component={Link}
-                to='/about'
+                to="/about"
                 onClick={() => props.setValue(3)}
                 className={classes.link}
               >
@@ -133,7 +133,7 @@ const Footer = (props) => {
               <Grid
                 item
                 component={Link}
-                to='/about'
+                to="/about"
                 onClick={() => props.setValue(3)}
                 className={classes.link}
               >
@@ -142,7 +142,7 @@ const Footer = (props) => {
               <Grid
                 item
                 component={Link}
-                to='/about'
+                to="/about"
                 onClick={() => props.setValue(3)}
                 className={classes.link}
               >
@@ -151,11 +151,11 @@ const Footer = (props) => {
             </Grid>
           </Grid>
           <Grid item className={classes.gridItem}>
-            <Grid container direction='column' spacing={2}>
+            <Grid container direction="column" spacing={2}>
               <Grid
                 item
                 component={Link}
-                to='/contact'
+                to="/contact"
                 onClick={() => props.setValue(4)}
                 className={classes.link}
               >
@@ -168,40 +168,40 @@ const Footer = (props) => {
       <img
         src={footerAdornment}
         className={classes.adornment}
-        alt='black decorative slash'
+        alt="black decorative slash"
       />
       <Grid
         container
-        justify='flex-end'
+        justify="flex-end"
         spacing={2}
         className={classes.socialContainer}
       >
         <Grid
           item
           component={'a'}
-          href='http://www.facebook.com'
-          rel='noopener noreferrer'
-          target='_blank'
+          href="http://www.facebook.com"
+          rel="noopener noreferrer"
+          target="_blank"
         >
-          <img src={facebook} alt='facebook logo' className={classes.icon} />
+          <img src={facebook} alt="facebook logo" className={classes.icon} />
         </Grid>
         <Grid
           item
           component={'a'}
-          href='http://www.twitter.com'
-          rel='noopener noreferrer'
-          target='_blank'
+          href="http://www.twitter.com"
+          rel="noopener noreferrer"
+          target="_blank"
         >
-          <img src={twitter} alt='twitter logo' className={classes.icon} />
+          <img src={twitter} alt="twitter logo" className={classes.icon} />
         </Grid>
         <Grid
           item
           component={'a'}
-          href='http://www.instagram.com'
-          rel='noopener noreferrer'
-          target='_blank'
+          href="http://www.instagram.com"
+          rel="noopener noreferrer"
+          target="_blank"
         >
-          <img src={instagram} alt='instagram logo' className={classes.icon} />
+          <img src={instagram} alt="instagram logo" className={classes.icon} />
         </Grid>
       </Grid>
     </footer>
