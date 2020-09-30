@@ -100,7 +100,9 @@ const Header = (props) => {
             }
           }
           break;
-
+        case '/estimate':
+          props.setValue(5);
+          break;
         default:
           break;
       }
@@ -113,7 +115,7 @@ const Header = (props) => {
         value={props.value}
         className={classes.tabContainer}
         onChange={handleChange}
-        indicatorColor="primary"
+        indicatorColor='primary'
       >
         {routes.map((route, index) => (
           <Tab
@@ -130,15 +132,20 @@ const Header = (props) => {
         ))}
       </Tabs>
       <Button
+        component={Link}
+        to='/estimate'
         disableRipple
-        variant="contained"
-        color="secondary"
+        variant='contained'
+        color='secondary'
         className={classes.button}
+        onClick={() => {
+          props.setValue(5);
+        }}
       >
         Free Estimate
       </Button>
       <Menu
-        id="simple-menu"
+        id='simple-menu'
         anchorEl={anchorEl}
         open={openMenu}
         onClose={handleClose}
@@ -212,7 +219,7 @@ const Header = (props) => {
               root: classes.drawerItemEstimate,
               selected: classes.drawerItemSelected,
             }}
-            to="/estimate"
+            to='/estimate'
             selected={props.value === 5}
           >
             <ListItemText className={classes.drawerItem} disableTypography>
@@ -234,16 +241,16 @@ const Header = (props) => {
   return (
     <>
       <ElevationScroll>
-        <AppBar position="fixed" className={classes.appBar}>
+        <AppBar position='fixed' className={classes.appBar}>
           <Toolbar disableGutters>
             <Button
               component={Link}
-              to="/"
+              to='/'
               className={classes.logoContainer}
               onClick={() => props.setValue(0)}
               disableRipple
             >
-              <img className={classes.logo} src={logo} alt="company_logo" />
+              <img className={classes.logo} src={logo} alt='company_logo' />
             </Button>
             {matches ? drawer : tabs}
           </Toolbar>
