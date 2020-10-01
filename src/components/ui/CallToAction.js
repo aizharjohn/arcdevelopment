@@ -57,7 +57,7 @@ const CallToAction = (props) => {
   return (
     <Grid
       container
-      alignItems='center'
+      alignItems="center"
       justify={matchesSM ? 'center' : 'space-between'}
       className={classes.background}
       direction={matchesSM ? 'column' : 'row'}
@@ -69,21 +69,21 @@ const CallToAction = (props) => {
           textAlign: matchesSM ? 'center' : 'inherit',
         }}
       >
-        <Grid container direction='column'>
+        <Grid container direction="column">
           <Grid item>
-            <Typography variant='h2'>
+            <Typography variant="h2">
               Simple Software.
               <br />
               Revolutionary Results.
             </Typography>
-            <Typography variant='subtitle2' style={{ fontSize: '1.5rem' }}>
+            <Typography variant="subtitle2" style={{ fontSize: '1.5rem' }}>
               Take advantage of the 21st Century.
             </Typography>
             <Grid container justify={matchesSM ? 'center' : undefined} item>
               <Button
                 component={Link}
-                to='/revolution'
-                variant='outlined'
+                to="/revolution"
+                variant="outlined"
                 className={classes.learnButton}
                 onClick={() => {
                   props.setValue(2);
@@ -103,8 +103,8 @@ const CallToAction = (props) => {
       <Grid item>
         <Button
           component={Link}
-          to='/estimate'
-          variant='contained'
+          to="/estimate"
+          variant="contained"
           className={classes.estimateButton}
           onClick={() => {
             props.setValue(5);
