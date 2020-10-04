@@ -44,10 +44,22 @@ const Services = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
-  const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
   return (
     <Grid container direction="column">
+      <Grid item>
+        <Typography
+          align={matchesSM ? 'center' : undefined}
+          variant="h2"
+          gutterBottom
+          style={{
+            marginLeft: matchesSM ? 0 : '5em',
+            marginTop: matchesSM ? '1em' : '2em',
+          }}
+        >
+          Services
+        </Typography>
+      </Grid>
       <Grid item>
         {/*-----iOS/Android Block-----*/}
         <Grid
@@ -55,12 +67,13 @@ const Services = (props) => {
           direction="row"
           justify={matchesSM ? 'center' : 'flex-end'}
           className={classes.serviceContainer}
-          style={{ marginTop: '5em' }}
+          style={{ marginTop: matchesSM ? '1em' : '5em' }}
         >
           <Grid
             item
             style={{
               textAlign: matchesSM ? 'center' : undefined,
+              width: matchesSM ? undefined : '35em',
             }}
           >
             <Typography variant="h4">iOS/Android App Development</Typography>
@@ -90,7 +103,12 @@ const Services = (props) => {
             </Button>
           </Grid>
           <Grid item style={{ marginRight: matchesSM ? 0 : '5em' }}>
-            <img src={mobileAppsIcon} alt="mobile phone icon" />
+            <img
+              className={classes.icon}
+              src={mobileAppsIcon}
+              alt="mobile phone icon"
+              width="250em"
+            />
           </Grid>
         </Grid>
       </Grid>
@@ -157,6 +175,7 @@ const Services = (props) => {
             item
             style={{
               textAlign: matchesSM ? 'center' : undefined,
+              width: matchesSM ? undefined : '35em',
             }}
           >
             <Typography variant="h4">Website Development</Typography>
@@ -189,6 +208,7 @@ const Services = (props) => {
               className={classes.icon}
               src={websitesIcon}
               alt="website icon"
+              width="250em"
             />
           </Grid>
         </Grid>
