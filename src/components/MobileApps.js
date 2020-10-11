@@ -12,13 +12,13 @@ import {
 
 import backArrow from '../assets/backArrow.svg';
 import forwardArrow from '../assets/forwardArrow.svg';
-import swiss from '../assets/swissKnife.svg'
-import access from '../assets/extendAccess.svg'
-import engagement from '../assets/increaseEngagement.svg'
+import swiss from '../assets/swissKnife.svg';
+import access from '../assets/extendAccess.svg';
+import engagement from '../assets/increaseEngagement.svg';
 
 import integrationAnimation from '../animations/integrationAnimation/data.json';
 
-import CallToAction from './ui/CallToAction'
+import CallToAction from './ui/CallToAction';
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -129,26 +129,38 @@ const MobileApps = (props) => {
           </Grid>
         </Hidden>
       </Grid>
-      <Grid 
-          item 
-          container 
-          direction={matchesSM ? 'column' : 'row'} 
-          style={{marginTop: '15em', marginBottom: '15em'}} 
-          className={classes.rowContainer}
+      <Grid
+        item
+        container
+        direction={matchesSM ? 'column' : 'row'}
+        style={{ marginTop: '15em', marginBottom: '15em' }}
+        className={classes.rowContainer}
       >
         <Grid item container direction="column" md>
           <Grid item>
-            <Typography align={matchesSM ? 'center' : undefined} variant="h4" gutterBottom>
+            <Typography
+              align={matchesSM ? 'center' : undefined}
+              variant="h4"
+              gutterBottom
+            >
               Integration
             </Typography>
           </Grid>
           <Grid item>
-            <Typography align={matchesSM ? 'center' : undefined} variant="body1" paragraph>
+            <Typography
+              align={matchesSM ? 'center' : undefined}
+              variant="body1"
+              paragraph
+            >
               Our technology enables an innate interconnection between web and
               mobile applications, putting everything you need right in one
               convenient place.
             </Typography>
-            <Typography align={matchesSM ? 'center' : undefined} variant="body1" paragraph>
+            <Typography
+              align={matchesSM ? 'center' : undefined}
+              variant="body1"
+              paragraph
+            >
               This allows you to extend your reach, reinvent interactions, and
               develop a stronger relationship with your users than ever before.
             </Typography>
@@ -163,58 +175,83 @@ const MobileApps = (props) => {
         </Grid>
         <Grid item container direction="column" md>
           <Grid item>
-            <Typography align={matchesSM ? 'center' : 'right'} variant="h4" gutterBottom>
+            <Typography
+              align={matchesSM ? 'center' : 'right'}
+              variant="h4"
+              gutterBottom
+            >
               Simultaneous Platform Support
             </Typography>
           </Grid>
           <Grid item>
-            <Typography align={matchesSM ? 'center' : 'right'} variant="body1" paragraph>
+            <Typography
+              align={matchesSM ? 'center' : 'right'}
+              variant="body1"
+              paragraph
+            >
               Our cutting-edge development process allows us to create apps for
               iPhone, Android, and tablets - all at the same time.
             </Typography>
-            <Typography align={matchesSM ? 'center' : 'right'} variant="body1" paragraph>
+            <Typography
+              align={matchesSM ? 'center' : 'right'}
+              variant="body1"
+              paragraph
+            >
               This significantly reduces costs and creates a more unified brand
               experience across all devices.
             </Typography>
           </Grid>
         </Grid>
       </Grid>
-      <Grid item container direction={matchesMD ? 'column' : 'row'} style={{marginBottom: '15em'}} className={classes.rowContainer}>
-        <Grid item container direction='column' alignItems='center' md>
+      <Grid
+        item
+        container
+        direction={matchesMD ? 'column' : 'row'}
+        style={{ marginBottom: '15em' }}
+        className={classes.rowContainer}
+      >
+        <Grid item container direction="column" alignItems="center" md>
           <Grid item>
-            <Typography align='center' variant='h4' gutterBottom>
+            <Typography align="center" variant="h4" gutterBottom>
               Extend Functionality
             </Typography>
           </Grid>
           <Grid item>
-            <img src={swiss} alt="swiss army knife"/>
+            <img src={swiss} alt="swiss army knife" />
           </Grid>
         </Grid>
-        <Grid 
-          item 
-          container 
-          direction='column' 
-          style={{marginTop: matchesMD ? '10em' : 0, marginBottom: matchesMD ? '10em' : 0}} 
-          alignItems='center' 
+        <Grid
+          item
+          container
+          direction="column"
+          style={{
+            marginTop: matchesMD ? '10em' : 0,
+            marginBottom: matchesMD ? '10em' : 0,
+          }}
+          alignItems="center"
           md
         >
           <Grid item>
-            <Typography align='center' variant='h4' gutterBottom>
+            <Typography align="center" variant="h4" gutterBottom>
               Extend Access
             </Typography>
           </Grid>
           <Grid item>
-            <img src={access} style={{maxWidth: matchesXS ? '20em' : '28em'}} alt="tear-one-off sign" />
+            <img
+              src={access}
+              style={{ maxWidth: matchesXS ? '20em' : '28em' }}
+              alt="tear-one-off sign"
+            />
           </Grid>
         </Grid>
-        <Grid item container direction='column' alignItems='center' md>
+        <Grid item container direction="column" alignItems="center" md>
           <Grid item>
-            <Typography align='center' variant='h4' gutterBottom>
+            <Typography align="center" variant="h4" gutterBottom>
               Increase Engagement
             </Typography>
           </Grid>
           <Grid item>
-            <img src={engagement} alt="app with notifications"/>
+            <img src={engagement} alt="app with notifications" />
           </Grid>
         </Grid>
       </Grid>

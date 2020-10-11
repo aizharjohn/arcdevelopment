@@ -292,7 +292,7 @@ const CustomSoftware = (props) => {
         </Grid>
         <Grid
           item
-          container
+          containerP
           className={classes.itemContainer}
           direction={matchesSM ? 'column' : 'row'}
           md
