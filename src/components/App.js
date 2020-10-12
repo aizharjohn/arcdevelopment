@@ -9,6 +9,7 @@ import Services from './Services';
 import CustomSoftware from './CustomSoftware';
 import MobileApps from './MobileApps';
 import Websites from './Websites';
+import Revolution from './Revolution';
 
 const App = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -26,7 +27,7 @@ const App = () => {
         <Switch>
           <Route
             exact
-            path="/"
+            path='/'
             render={(props) => (
               <LandingPage
                 {...props}
@@ -37,7 +38,7 @@ const App = () => {
           />
           <Route
             exact
-            path="/services"
+            path='/services'
             render={(props) => (
               <Services
                 {...props}
@@ -48,7 +49,7 @@ const App = () => {
           />
           <Route
             exact
-            path="/customsoftware"
+            path='/customsoftware'
             render={(props) => (
               <CustomSoftware
                 {...props}
@@ -59,7 +60,7 @@ const App = () => {
           />
           <Route
             exact
-            path="/mobileapps"
+            path='/mobileapps'
             render={(props) => (
               <MobileApps
                 {...props}
@@ -70,7 +71,7 @@ const App = () => {
           />
           <Route
             exact
-            path="/websites"
+            path='/websites'
             render={(props) => (
               <Websites
                 {...props}
@@ -81,16 +82,22 @@ const App = () => {
           />
           <Route
             exact
-            path="/revolution"
-            component={() => <div>The Revolution</div>}
+            path='/revolution'
+            render={(props) => (
+              <Revolution
+                {...props}
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+              />
+            )}
           />
-          <Route exact path="/about" component={() => <div>About</div>} />
+          <Route exact path='/about' component={() => <div>About</div>} />
           <Route
             exact
-            path="/contact"
+            path='/contact'
             component={() => <div>Contact Us</div>}
           />
-          <Route exact path="/estimate" component={() => <div>Estimate</div>} />
+          <Route exact path='/estimate' component={() => <div>Estimate</div>} />
         </Switch>
         <Footer setValue={setValue} setSelectedIndex={setSelectedIndex} />
       </Router>
