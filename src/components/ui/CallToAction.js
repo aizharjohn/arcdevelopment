@@ -1,63 +1,20 @@
 import React from 'react';
 import { Grid, Typography, Button, useMediaQuery } from '@material-ui/core';
-import { makeStyles, useTheme } from '@material-ui/styles';
+import { useTheme } from '@material-ui/styles';
 import ButtonArrow from './ButtonArrow';
 import { Link } from 'react-router-dom';
 
-import background from '../../assets/background.jpg';
-import mobileBackground from '../../assets/mobileBackground.jpg';
-
-const useStyles = makeStyles((theme) => ({
-  learnButton: {
-    ...theme.typography.learnButton,
-    fontSize: '0.7rem',
-    height: 35,
-    padding: 5,
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: '2em',
-    },
-  },
-  background: {
-    backgroundImage: `url(${background})`,
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundAttachment: 'fixed',
-    height: '60em',
-    width: '100%',
-    [theme.breakpoints.down('md')]: {
-      backgroundImage: `url(${mobileBackground})`,
-      backgroundAttachment: 'inherit',
-    },
-  },
-  estimateButton: {
-    ...theme.typography.estimate,
-    backgroundColor: theme.palette.common.orange,
-    borderRadius: 50,
-    height: 80,
-    width: 205,
-    fontSize: '1.5rem',
-    marginRight: '5em',
-    marginLeft: '2em',
-    '&:hover': {
-      backgroundColor: theme.palette.secondary.light,
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginLeft: 0,
-      marginRight: 0,
-    },
-  },
-}));
+import { ctaStyles } from '../ui/styles';
 
 const CallToAction = (props) => {
-  const classes = useStyles();
+  const classes = ctaStyles();
   const theme = useTheme();
   const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Grid
       container
-      alignItems="center"
+      alignItems='center'
       justify={matchesSM ? 'center' : 'space-between'}
       className={classes.background}
       direction={matchesSM ? 'column' : 'row'}
@@ -69,21 +26,21 @@ const CallToAction = (props) => {
           textAlign: matchesSM ? 'center' : 'inherit',
         }}
       >
-        <Grid container direction="column">
+        <Grid container direction='column'>
           <Grid item>
-            <Typography variant="h2">
+            <Typography variant='h2'>
               Simple Software.
               <br />
               Revolutionary Results.
             </Typography>
-            <Typography variant="subtitle2" style={{ fontSize: '1.5rem' }}>
+            <Typography variant='subtitle2' style={{ fontSize: '1.5rem' }}>
               Take advantage of the 21st Century.
             </Typography>
             <Grid container justify={matchesSM ? 'center' : undefined} item>
               <Button
                 component={Link}
-                to="/revolution"
-                variant="outlined"
+                to='/revolution'
+                variant='outlined'
                 className={classes.learnButton}
                 onClick={() => {
                   props.setValue(2);
@@ -103,8 +60,8 @@ const CallToAction = (props) => {
       <Grid item>
         <Button
           component={Link}
-          to="/estimate"
-          variant="contained"
+          to='/estimate'
+          variant='contained'
           className={classes.estimateButton}
           onClick={() => {
             props.setValue(5);
