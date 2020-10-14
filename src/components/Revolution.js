@@ -10,6 +10,13 @@ import {
 } from '@material-ui/core';
 
 import vision from '../assets/vision.svg';
+import mockup from '../assets/mockupIcon.svg';
+import review from '../assets/reviewIcon.svg';
+import design from '../assets/designIcon.svg';
+import build from '../assets/buildIcon.svg';
+import launch from '../assets/launchIcon.svg';
+import maintain from '../assets/maintainIcon.svg';
+import iterate from '../assets/iterateIcon.svg';
 import technologyAnimation from '../animations/technologyAnimation/data.json';
 import consultation from '../assets/consultationIcon.svg';
 
@@ -225,7 +232,320 @@ const Revolution = () => {
           </Grid>
         </Grid>
         <Grid item lg style={{ alignSelf: 'center' }}>
-          <img src={consultation} alt="hand shake" />
+          <img src={consultation} alt="handshake" />
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        container
+        direction="row"
+        className={classes.rowContainer}
+        style={{ backgroundColor: '#b3b3b3', height: '90em' }}
+      >
+        <Grid item container direction="column" lg>
+          <Grid item>
+            <Typography
+              variant="h4"
+              gutterBottom
+              style={{ color: '#000', marginTop: '5em' }}
+            >
+              Mockup
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              After we settle on the best path forward and decide on a solution
+              to pursue, details like the cost and timeline will be finalized.
+            </Typography>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              Then it's time for us to start on your minimum viable product.
+              That's just a fancy term for a mockup, which doesn't include
+              colors, images, or any other polished design elements, but
+              captures the essential layout structure and functionality.
+            </Typography>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              This helps us understand and refine the solution itself before
+              getting distracted by specifics and looks.
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid item lg style={{ alignSelf: 'center' }}>
+          <img src={mockup} alt="basic website design outline" />
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        container
+        direction="row"
+        className={classes.rowContainer}
+        style={{ backgroundColor: '#b3b3b3', height: '90em' }}
+      >
+        <Grid item container direction="column" lg>
+          <Grid item>
+            <Typography
+              variant="h4"
+              gutterBottom
+              style={{ color: '#000', marginTop: '5em' }}
+            >
+              Design
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              Before moving any farther we come back to you with our progress.
+              This gives you the freedom to discuss any changes you may want or
+              any ideas you may have come up with before any heavy lifting has
+              been done.
+            </Typography>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              We give you an interactive demostration of the mockups, thoroughly
+              explaining the thought process that went into each screen and
+              every anticipated feature.
+            </Typography>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              Once you're completely satisfied with the vision for our solution
+              we get down to the nitty gritty, fine-details of design.
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid item lg style={{ alignSelf: 'center' }}>
+          <img src={review} alt="magnifying glass" />
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        container
+        direction="row"
+        className={classes.rowContainer}
+        style={{ backgroundColor: '#b3b3b3', height: '90em' }}
+      >
+        <Grid item container direction="column" lg>
+          <Grid item>
+            <Typography
+              variant="h4"
+              gutterBottom
+              style={{ color: '#000', marginTop: '5em' }}
+            >
+              Mockup
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              Using the mockups and notes taken during the consultation as
+              guides, we will start ironing out what the final procduct will
+              look like. This also involves using any branded material like
+              fonts, colors, and logos to extend the experience you're already
+              familiar with.
+            </Typography>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              No aspect is superfluous, and care will be taken with every
+              decision.
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid item lg style={{ alignSelf: 'center' }}>
+          <img src={design} alt="paintbrush leaving stroke of paint" />
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        container
+        direction="row"
+        className={classes.rowContainer}
+        style={{ backgroundColor: '#b3b3b3', height: '90em' }}
+      >
+        <Grid item container direction="column" lg>
+          <Grid item>
+            <Typography
+              variant="h4"
+              gutterBottom
+              style={{ color: '#000', marginTop: '5em' }}
+            >
+              Review
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              A second round of review is essential to our goal of creating
+              exactly what you want, exactly how you want it.
+            </Typography>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              This time we'll be going over the finalized designs in another
+              fully interactive demonstration. Again this gives you an
+              opportunity to tweak things and make sure we get everything right
+              the first time.
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid item lg style={{ alignSelf: 'center' }}>
+          <img src={review} alt="magnifying glass" />
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        container
+        direction="row"
+        className={classes.rowContainer}
+        style={{ backgroundColor: '#b3b3b3', height: '90em' }}
+      >
+        <Grid item container direction="column" lg>
+          <Grid item>
+            <Typography
+              variant="h4"
+              gutterBottom
+              style={{ color: '#000', marginTop: '5em' }}
+            >
+              Build
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              Here's where we get down to business.
+            </Typography>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              Engineering begins after your approval on the final designs. We
+              start by scaffolding out the project on a high level, prioritizing
+              some areas over others.
+            </Typography>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              Each area is then developed in order of importance until ready to
+              be connected to the next piece.
+            </Typography>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              Typically the backend, behind the scenes operations are completed
+              first. Once all the services are in place we can then create the
+              front end, user side of things.
+            </Typography>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              Finishing the application doesn't mean we're done though, because
+              we use extensive testing to guarantee compability with all
+              intended devices.
+            </Typography>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              Only after our rigorous examinations will we accept a product as
+              finished, then pushing it through the production pipeline. This
+              produces an optimized, compressed, consumer version of the code
+              and assets ready for deployment.
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid item lg style={{ alignSelf: 'center' }}>
+          <img src={build} alt="building construction site" />
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        container
+        direction="row"
+        className={classes.rowContainer}
+        style={{ backgroundColor: '#b3b3b3', height: '90em' }}
+      >
+        <Grid item container direction="column" lg>
+          <Grid item>
+            <Typography
+              variant="h4"
+              gutterBottom
+              style={{ color: '#000', marginTop: '5em' }}
+            >
+              Launch
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              The moment we've all been waiting for.
+            </Typography>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              When construction comes to a close you're th first one to know.
+              We'll give you our final demostration to show off your shiny new
+              software in the wild so you know exactly how it will look to your
+              users.
+            </Typography>
+            <Typography
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              When you say the word, we press the button and launch your project
+              out to the public. We're there to ensure everything goes to plan
+              so you can start reaping th rewards of your technological
+              investment immediately.
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid item lg style={{ alignSelf: 'center' }}>
+          <img src={launch} alt="rocket" />
         </Grid>
       </Grid>
     </Grid>
