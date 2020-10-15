@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
 const Revolution = () => {
   const classes = useStyles();
   const theme = useTheme();
+  const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
+  const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
+  const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
   const defaultOptions = {
     loop: true,
@@ -47,55 +50,88 @@ const Revolution = () => {
   return (
     <Grid container direction="column">
       <Grid item className={classes.rowContainer} style={{ marginTop: '2em' }}>
-        <Typography style={{ fontFamily: 'Pacifico' }} variant="h2">
+        <Typography
+          align={matchesMD ? 'center' : undefined}
+          style={{ fontFamily: 'Pacifico' }}
+          variant="h2"
+        >
           The Revolution
         </Typography>
       </Grid>
       <Grid
         item
         container
-        direction="row"
+        direction={matchesMD ? 'column' : 'row'}
         alignItems="center"
         className={classes.rowContainer}
+        style={{ marginTop: '5em' }}
       >
         <Grid item lg>
           <img
             src={vision}
             alt="mountain through binoculars"
-            style={{ maxWidth: '40em', marginRight: '5em' }}
+            style={{
+              maxWidth: matchesSM ? 100 : '40em',
+              marginRight: matchesMD ? 0 : '5em',
+              marginBottom: matchesMD ? '5em' : 0,
+            }}
           />
         </Grid>
         <Grid item container direction="column" lg style={{ maxWidth: '40em' }}>
           <Grid item>
-            <Typography align="right" variant="h4" gutterBottom>
+            <Typography
+              align={matchesMD ? 'center' : 'right'}
+              variant="h4"
+              gutterBottom
+            >
               Vision
             </Typography>
           </Grid>
           <Grid item>
-            <Typography align="right" variant="body1" paragraph>
+            <Typography
+              align={matchesMD ? 'center' : 'right'}
+              variant="body1"
+              paragraph
+            >
               The rise of computers, and subsequently the Internet, has
               completely altered every aspect of human life. This has increased
               our comfort, broadened our connections, and reshaped how we view
               the world.
             </Typography>
-            <Typography align="right" variant="body1" paragraph>
+            <Typography
+              align={matchesMD ? 'center' : 'right'}
+              variant="body1"
+              paragraph
+            >
               What once was confined to huge rooms and teams of engineers now
               resides in every single one of our hands. Harnessing this
               unlimited potential by using it to solve problems and better lives
               is at the heart of everything we do.
             </Typography>
-            <Typography align="right" variant="body1" paragraph>
+            <Typography
+              align={matchesMD ? 'center' : 'right'}
+              variant="body1"
+              paragraph
+            >
               We want to help businesses capitalize on the latest and greatest
               technology. The best way to predict the future is to be the one
               building it, and we want to help guide the world into this next
               chapter of technological expansion, exploration, and innovation.
             </Typography>
-            <Typography align="right" variant="body1" paragraph>
+            <Typography
+              align={matchesMD ? 'center' : 'right'}
+              variant="body1"
+              paragraph
+            >
               By holding ourselves to rigorous standards and pristine quality,
               we can ensure you have the absolute best tools necessary to thrive
               in this new frontier.
             </Typography>
-            <Typography align="right" variant="body1" paragraph>
+            <Typography
+              align={matchesMD ? 'center' : 'right'}
+              variant="body1"
+              paragraph
+            >
               We see a future where every individual has personalized software
               custom tailored to their lifestyle, culture, and interests,
               helping them overcome life's obstacles. Each project is a step
@@ -107,54 +143,87 @@ const Revolution = () => {
       <Grid
         item
         container
-        direction="row"
+        direction={matchesMD ? 'column' : 'row'}
         alignItems="center"
         className={classes.rowContainer}
+        style={{ marginTop: '10em', marginBottom: '10em' }}
       >
         <Grid item container direction="column" lg style={{ maxWidth: '40em' }}>
           <Grid item>
-            <Typography variant="h4" gutterBottom>
+            <Typography
+              align={matchesMD ? 'center' : undefined}
+              variant="h4"
+              gutterBottom
+            >
               Technology
             </Typography>
           </Grid>
           <Grid item>
-            <Typography variant="body1" paragraph>
+            <Typography
+              align={matchesMD ? 'center' : undefined}
+              variant="body1"
+              paragraph
+            >
               In 2013, Facebook invented a new way of building websites. This
               new system, React.js, completely revolutionizes the process and
               practice of website development.
             </Typography>
-            <Typography variant="body1" paragraph>
+            <Typography
+              align={matchesMD ? 'center' : undefined}
+              variant="body1"
+              paragraph
+            >
               Instead of chaining together long individual pages, like
               traditional websites, React websites are built with little chunks
               of code called components. These components are faster, easier to
               maintain, and are easily reused and customized, each serving a
               singlar purpose.
             </Typography>
-            <Typography variant="body1" paragraph>
+            <Typography
+              align={matchesMD ? 'center' : undefined}
+              variant="body1"
+              paragraph
+            >
               Two years later they shocked the world by releasing a similar
               system, React Native, for producing iOs and Android apps. Instead
               of having to master two completely separate development platforms,
               you can leverage the knowledge you already possessed from building
               websites and reapply it directly! This was a huge leap forward.
             </Typography>
-            <Typography variant="body1" paragraph>
+            <Typography
+              align={matchesMD ? 'center' : undefined}
+              variant="body1"
+              paragraph
+            >
               This technology is now being used by companies like AirBnB,
               Microsoft, Netflix, Pinterest, Skype, Tesla, UberEats, and when
               Facebook purchased Instagram large portions of it were even
               rebuilt using React.
             </Typography>
-            <Typography variant="body1" paragraph>
+            <Typography
+              align={matchesMD ? 'center' : undefined}
+              variant="body1"
+              paragraph
+            >
               Developers have since built on top of these systems by automating
               project setup and deployment, allowing creators to focus as much
               as possible on their work itself.
             </Typography>
-            <Typography variant="body1" paragraph>
+            <Typography
+              align={matchesMD ? 'center' : undefined}
+              variant="body1"
+              paragraph
+            >
               These technical advancements translate into savings by
               significantly reducing the workload and streamlining the workflow
               foe developing new pieces of software, while also lowering the
               barrier to entry for mobile app development.
             </Typography>
-            <Typography variant="body1" paragraph>
+            <Typography
+              align={matchesMD ? 'center' : undefined}
+              variant="body1"
+              paragraph
+            >
               This puts personalization in your pocket - faster, better, and
               more affordable then ever before.
             </Typography>
@@ -191,6 +260,7 @@ const Revolution = () => {
         <Grid item container direction="column" lg>
           <Grid item>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="h4"
               gutterBottom
               style={{ color: '#000', marginTop: '5em' }}
@@ -200,6 +270,7 @@ const Revolution = () => {
           </Grid>
           <Grid item>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
@@ -211,6 +282,7 @@ const Revolution = () => {
               your business holistically to find best solutions.
             </Typography>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
@@ -220,6 +292,7 @@ const Revolution = () => {
               consideration.
             </Typography>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
@@ -240,11 +313,12 @@ const Revolution = () => {
         container
         direction="row"
         className={classes.rowContainer}
-        style={{ backgroundColor: '#b3b3b3', height: '90em' }}
+        style={{ backgroundColor: '#ff7373', height: '90em' }}
       >
         <Grid item container direction="column" lg>
           <Grid item>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="h4"
               gutterBottom
               style={{ color: '#000', marginTop: '5em' }}
@@ -254,6 +328,7 @@ const Revolution = () => {
           </Grid>
           <Grid item>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
@@ -262,6 +337,7 @@ const Revolution = () => {
               to pursue, details like the cost and timeline will be finalized.
             </Typography>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
@@ -272,6 +348,7 @@ const Revolution = () => {
               captures the essential layout structure and functionality.
             </Typography>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
@@ -290,20 +367,22 @@ const Revolution = () => {
         container
         direction="row"
         className={classes.rowContainer}
-        style={{ backgroundColor: '#b3b3b3', height: '90em' }}
+        style={{ backgroundColor: '#39b54a', height: '90em' }}
       >
         <Grid item container direction="column" lg>
           <Grid item>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="h4"
               gutterBottom
               style={{ color: '#000', marginTop: '5em' }}
             >
-              Design
+              Review
             </Typography>
           </Grid>
           <Grid item>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
@@ -314,20 +393,22 @@ const Revolution = () => {
               been done.
             </Typography>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
             >
-              We give you an interactive demostration of the mockups, thoroughly
-              explaining the thought process that went into each screen and
-              every anticipated feature.
+              We give you an interactive demonstration of the mockups,
+              thoroughly explaining the thought process that went into each
+              screen and every anticipated feature.
             </Typography>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
             >
-              Once you're completely satisfied with the vision for our solution
+              Once you’re completely satisfied with the vision for our solution
               we get down to the nitty gritty, fine-details of design.
             </Typography>
           </Grid>
@@ -341,42 +422,54 @@ const Revolution = () => {
         container
         direction="row"
         className={classes.rowContainer}
-        style={{ backgroundColor: '#b3b3b3', height: '90em' }}
+        style={{ backgroundColor: '#a67c52', height: '90em' }}
       >
         <Grid item container direction="column" lg>
           <Grid item>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="h4"
               gutterBottom
               style={{ color: '#000', marginTop: '5em' }}
             >
-              Mockup
+              Design
             </Typography>
           </Grid>
           <Grid item>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
             >
-              Using the mockups and notes taken during the consultation as
-              guides, we will start ironing out what the final procduct will
-              look like. This also involves using any branded material like
-              fonts, colors, and logos to extend the experience you're already
-              familiar with.
+              Before moving any farther we come back to you with our progress.
+              This gives you the freedom to discuss any changes you may want or
+              any ideas you may have come up with before any heavy lifting has
+              been done.
             </Typography>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
             >
-              No aspect is superfluous, and care will be taken with every
-              decision.
+              We give you an interactive demostration of the mockups, thoroughly
+              explaining the thought process that went into each screen and
+              every anticipated feature.
+            </Typography>
+            <Typography
+              align={matchesMD ? 'center' : undefined}
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              Once you're completely satisfied with the vision for our solution
+              we get down to the nitty gritty, fine-details of design.
             </Typography>
           </Grid>
         </Grid>
         <Grid item lg style={{ alignSelf: 'center' }}>
-          <img src={design} alt="paintbrush leaving stroke of paint" />
+          <img src={design} alt="paintbrush" />
         </Grid>
       </Grid>
       <Grid
@@ -384,11 +477,12 @@ const Revolution = () => {
         container
         direction="row"
         className={classes.rowContainer}
-        style={{ backgroundColor: '#b3b3b3', height: '90em' }}
+        style={{ backgroundColor: '#39b54a', height: '90em' }}
       >
         <Grid item container direction="column" lg>
           <Grid item>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="h4"
               gutterBottom
               style={{ color: '#000', marginTop: '5em' }}
@@ -398,6 +492,7 @@ const Revolution = () => {
           </Grid>
           <Grid item>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
@@ -406,11 +501,12 @@ const Revolution = () => {
               exactly what you want, exactly how you want it.
             </Typography>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
             >
-              This time we'll be going over the finalized designs in another
+              This time we’ll be going over the finalized designs in another
               fully interactive demonstration. Again this gives you an
               opportunity to tweak things and make sure we get everything right
               the first time.
@@ -426,11 +522,12 @@ const Revolution = () => {
         container
         direction="row"
         className={classes.rowContainer}
-        style={{ backgroundColor: '#b3b3b3', height: '90em' }}
+        style={{ backgroundColor: '#fbb03b', height: '90em' }}
       >
         <Grid item container direction="column" lg>
           <Grid item>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="h4"
               gutterBottom
               style={{ color: '#000', marginTop: '5em' }}
@@ -440,6 +537,7 @@ const Revolution = () => {
           </Grid>
           <Grid item>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
@@ -447,6 +545,7 @@ const Revolution = () => {
               Here's where we get down to business.
             </Typography>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
@@ -456,6 +555,7 @@ const Revolution = () => {
               some areas over others.
             </Typography>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
@@ -464,6 +564,7 @@ const Revolution = () => {
               be connected to the next piece.
             </Typography>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
@@ -473,6 +574,7 @@ const Revolution = () => {
               front end, user side of things.
             </Typography>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
@@ -482,6 +584,7 @@ const Revolution = () => {
               intended devices.
             </Typography>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
@@ -502,11 +605,12 @@ const Revolution = () => {
         container
         direction="row"
         className={classes.rowContainer}
-        style={{ backgroundColor: '#b3b3b3', height: '90em' }}
+        style={{ backgroundColor: '#c1272d', height: '90em' }}
       >
         <Grid item container direction="column" lg>
           <Grid item>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="h4"
               gutterBottom
               style={{ color: '#000', marginTop: '5em' }}
@@ -516,6 +620,7 @@ const Revolution = () => {
           </Grid>
           <Grid item>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
@@ -523,6 +628,7 @@ const Revolution = () => {
               The moment we've all been waiting for.
             </Typography>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
@@ -533,6 +639,7 @@ const Revolution = () => {
               users.
             </Typography>
             <Typography
+              align={matchesMD ? 'center' : undefined}
               variant="body1"
               paragraph
               style={{ color: '#fff', maxWidth: '20em' }}
@@ -546,6 +653,115 @@ const Revolution = () => {
         </Grid>
         <Grid item lg style={{ alignSelf: 'center' }}>
           <img src={launch} alt="rocket" />
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        container
+        direction="row"
+        className={classes.rowContainer}
+        style={{ backgroundColor: '#8e45ce', height: '90em' }}
+      >
+        <Grid item container direction="column" lg>
+          <Grid item>
+            <Typography
+              align={matchesMD ? 'center' : undefined}
+              variant="h4"
+              gutterBottom
+              style={{ color: '#000', marginTop: '5em' }}
+            >
+              Maintain
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography
+              align={matchesMD ? 'center' : undefined}
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              Our work doesn't end there.
+            </Typography>
+            <Typography
+              align={matchesMD ? 'center' : undefined}
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              After a successful launch we keep in close contact to listen to
+              feedback and hear how the project is being received.
+            </Typography>
+            <Typography
+              align={matchesMD ? 'center' : undefined}
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              From there on out we make sure your application is kept up to date
+              and taking advantage of the best features and practices available.
+              When new developments arise or new techniques are discovered in
+              future projects, we will implement those advancements in your
+              project as part of our routine maintenance.
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid item lg style={{ alignSelf: 'center' }}>
+          <img src={maintain} alt="wrench tightening bolts" />
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        container
+        direction="row"
+        className={classes.rowContainer}
+        style={{ backgroundColor: '#29abe2', height: '90em' }}
+      >
+        <Grid item container direction="column" lg>
+          <Grid item>
+            <Typography
+              align={matchesMD ? 'center' : undefined}
+              variant="h4"
+              gutterBottom
+              style={{ color: '#000', marginTop: '5em' }}
+            >
+              Iterate
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography
+              align={matchesMD ? 'center' : undefined}
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              The cycle repeats whenever you come up with a new idea for
+              extending your current project, or come up with a brand new system
+              entirely.
+            </Typography>
+            <Typography
+              align={matchesMD ? 'center' : undefined}
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              By planning for future features and changes we can build and
+              evolve your application over time. As new cases and customer needs
+              develop we can respond with continuous integration of new content.
+            </Typography>
+            <Typography
+              align={matchesMD ? 'center' : undefined}
+              variant="body1"
+              paragraph
+              style={{ color: '#fff', maxWidth: '20em' }}
+            >
+              Our iterative process will keep you current and competitive,
+              allowing you to quickly implement changes instead of waiting
+              months for a single update.
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid item lg style={{ alignSelf: 'center' }}>
+          <img src={iterate} alt="falling dominoes" />
         </Grid>
       </Grid>
     </Grid>
