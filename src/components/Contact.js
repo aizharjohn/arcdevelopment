@@ -58,6 +58,22 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: '2em',
     },
   },
+  message: {
+    border: `2px solid ${theme.palette.common.blue}`,
+    marginTop: '5em',
+    borderRadius: 5,
+  },
+  sendButton: {
+    ...theme.typography.estimate,
+    borderRadius: 50,
+    height: 45,
+    width: 245,
+    fontSize: '1rem',
+    backgroundColor: theme.palette.common.orange,
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.light,
+    },
+  },
 }));
 
 const Contact = (props) => {
@@ -115,7 +131,7 @@ const Contact = (props) => {
             </Typography>
           </Grid>
         </Grid>
-        <Grid item container>
+        <Grid item container style={{ maxWidth: '20em' }}>
           <Grid item>
             <TextField
               label="Name"
@@ -141,9 +157,11 @@ const Contact = (props) => {
             />
           </Grid>
         </Grid>
-        <Grid item>
+        <Grid item style={{ maxWidth: '20em' }}>
           <TextField
+            InputProps={{ disableUnderline: true }}
             value={message}
+            className={classes.message}
             id="message"
             multiline
             rows={10}
@@ -151,8 +169,9 @@ const Contact = (props) => {
           />
         </Grid>
         <Grid item>
-          <Button variant="contained">
-            Send Message <img src={airplane} alt="airplane" />
+          <Button variant="contained" className={classes.sendButton}>
+            Send Message{' '}
+            <img src={airplane} alt="airplane" style={{ marginLeft: '1em' }} />
           </Button>
         </Grid>
       </Grid>
