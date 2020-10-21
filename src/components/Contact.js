@@ -12,6 +12,7 @@ import {
 import ButtonArrow from './ui/ButtonArrow';
 
 import background from '../assets/background.jpg';
+import mobileBackground from '../assets/mobileBackground.jpg';
 import phoneIcon from '../assets/phone.svg';
 import emailIcon from '../assets/email.svg';
 import airplane from '../assets/send.svg';
@@ -23,15 +24,19 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     height: '60em',
-  },
-  rowContainer: {
-    paddingLeft: '5em',
-    paddingRight: '5em',
-    [theme.breakpoints.down('sm')]: {
-      paddingLeft: '1.5em',
-      paddingRight: '1.5em',
+    paddingBottom: '10em',
+    [theme.breakpoints.down('md')]: {
+      backgroundImage: `url(${mobileBackground})`,
     },
   },
+  // rowContainer: {
+  //   paddingLeft: '5em',
+  //   paddingRight: '5em',
+  //   [theme.breakpoints.down('sm')]: {
+  //     paddingLeft: '1.5em',
+  //     paddingRight: '1.5em',
+  //   },
+  // },
   estimateButton: {
     ...theme.typography.estimate,
     backgroundColor: theme.palette.common.orange,
@@ -44,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: theme.palette.secondary.light,
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       marginLeft: 0,
       marginRight: 0,
     },
@@ -54,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '0.7rem',
     height: 35,
     padding: 5,
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       marginBottom: '2em',
     },
   },
@@ -84,122 +89,204 @@ const Contact = (props) => {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [emailHelper, setEmailHelper] = useState('');
   const [phone, setPhone] = useState('');
+  const [phoneHelper, setPhoneHelper] = useState('');
   const [message, setMessage] = useState('');
+
+  const onChange = (event) => {
+    let valid;
+
+    switch (event.target.id) {
+      case email:
+        setEmail(event.target.value);
+        valid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
+          event.target.value
+        );
+        if (!valid) {
+          setEmailHelper('Invalid Email');
+        } else {
+          setEmailHelper('');
+        }
+        break;
+
+      case phone:
+        setPhone(event.target.value);
+        valid = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(
+          event.target.value
+        );
+
+        if (!valid) {
+          setPhoneHelper('Invalid Phone');
+        } else {
+          setPhoneHelper('');
+        }
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <Grid container direction="row">
-      <Grid item container direction="column" justify="center" lg={3}>
+      <Grid
+        item
+        container
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{
+          marginBottom: matchesMD ? '5em' : 0,
+          marginTop: matchesSM ? '1em' : matchesMD ? '5em' : 0,
+        }}
+        lg={4}
+        xl={3}
+      >
         <Grid item>
-          <Typography style={{ lineHeight: 1 }} variant="h2">
-            Contact Us
-          </Typography>
-          <Typography
-            variant="body1"
-            style={{ color: theme.palette.common.blue }}
-          >
-            We're waiting
-          </Typography>
-        </Grid>
-        <Grid item container>
-          <Grid item>
-            <img src={phoneIcon} alt="phone" style={{ marginRight: '0.5em' }} />
-          </Grid>
-          <Grid item>
-            <Typography
-              variant="body1"
-              style={{ color: theme.palette.common.blue, fontSize: '1rem' }}
+          <Grid container direction="column">
+            <Grid item>
+              <Typography
+                align={matchesMD ? 'center' : undefined}
+                style={{ lineHeight: 1 }}
+                variant="h2"
+              >
+                Contact Us
+              </Typography>
+              <Typography
+                align={matchesMD ? 'center' : undefined}
+                variant="body1"
+                style={{ color: theme.palette.common.blue }}
+              >
+                We're waiting
+              </Typography>
+            </Grid>
+            <Grid item container style={{ marginTop: '2em' }}>
+              <Grid item>
+                <img
+                  src={phoneIcon}
+                  alt="phone"
+                  style={{ marginRight: '0.5em' }}
+                />
+              </Grid>
+              <Grid item>
+                <Typography
+                  variant="body1"
+                  style={{ color: theme.palette.common.blue, fontSize: '1rem' }}
+                >
+                  (555) 555-5555
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid item container style={{ marginBottom: '2em' }}>
+              <Grid item>
+                <img
+                  src={emailIcon}
+                  alt="envelope"
+                  style={{ marginRight: '0.5em', verticalAlign: 'bottom' }}
+                />
+              </Grid>
+              <Grid item>
+                <Typography
+                  variant="body1"
+                  style={{ color: theme.palette.common.blue, fontSize: '1rem' }}
+                >
+                  johndoe@gmail.com
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid
+              item
+              container
+              direction="column"
+              style={{ maxWidth: '20em' }}
             >
-              (555) 555-5555
-            </Typography>
+              <Grid item style={{ marginBottom: '0.5em' }}>
+                <TextField
+                  label="Name"
+                  id="name"
+                  fullWidth
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                />
+              </Grid>
+              <Grid item style={{ marginBottom: '0.5em' }}>
+                <TextField
+                  label="Email"
+                  error={emailHelper.length !== 0}
+                  id="email"
+                  fullWidth
+                  value={email}
+                  onChange={onChange}
+                />
+              </Grid>
+              <Grid item style={{ marginBottom: '0.5em' }}>
+                <TextField
+                  label="Phone"
+                  error={phoneHelper.length !== 0}
+                  id="phone"
+                  fullWidth
+                  value={phone}
+                  onChange={onChange}
+                />
+              </Grid>
+            </Grid>
+            <Grid item style={{ maxWidth: '20em' }}>
+              <TextField
+                InputProps={{ disableUnderline: true }}
+                value={message}
+                className={classes.message}
+                id="message"
+                fullWidth
+                multiline
+                rows={10}
+                onChange={(event) => setMessage(event.target.value)}
+              />
+            </Grid>
+            <Grid item container justify="center" style={{ marginTop: '2em' }}>
+              <Button variant="contained" className={classes.sendButton}>
+                Send Message{' '}
+                <img
+                  src={airplane}
+                  alt="airplane"
+                  style={{ marginLeft: '1em' }}
+                />
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid item container>
-          <Grid item>
-            <img
-              src={emailIcon}
-              alt="envelope"
-              style={{ marginRight: '0.5em', verticalAlign: 'bottom' }}
-            />
-          </Grid>
-          <Grid item>
-            <Typography
-              variant="body1"
-              style={{ color: theme.palette.common.blue, fontSize: '1rem' }}
-            >
-              johndoe@gmail.com
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid item container style={{ maxWidth: '20em' }}>
-          <Grid item>
-            <TextField
-              label="Name"
-              id="name"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              label="Email"
-              id="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              label="Phone"
-              id="phone"
-              value={phone}
-              onChange={(event) => setPhone(event.target.value)}
-            />
-          </Grid>
-        </Grid>
-        <Grid item style={{ maxWidth: '20em' }}>
-          <TextField
-            InputProps={{ disableUnderline: true }}
-            value={message}
-            className={classes.message}
-            id="message"
-            multiline
-            rows={10}
-            onChange={(event) => setMessage(event.target.value)}
-          />
-        </Grid>
-        <Grid item>
-          <Button variant="contained" className={classes.sendButton}>
-            Send Message{' '}
-            <img src={airplane} alt="airplane" style={{ marginLeft: '1em' }} />
-          </Button>
         </Grid>
       </Grid>
       <Grid
         item
         container
+        direction={matchesMD ? 'column' : 'row'}
         className={classes.background}
         alignItems="center"
-        lg={9}
+        justify={matchesMD ? 'center' : undefined}
+        lg={8}
+        xl={9}
       >
         <Grid
           item
           style={{
-            marginLeft: matchesSM ? 0 : '5em',
-            textAlign: matchesSM ? 'center' : 'inherit',
+            marginLeft: matchesMD ? 0 : '3em',
+            textAlign: matchesMD ? 'center' : 'inherit',
           }}
         >
           <Grid container direction="column">
             <Grid item>
-              <Typography variant="h2">
+              <Typography align={matchesMD ? 'center' : undefined} variant="h2">
                 Simple Software.
                 <br />
                 Revolutionary Results.
               </Typography>
-              <Typography variant="subtitle2" style={{ fontSize: '1.5rem' }}>
+              <Typography
+                align={matchesMD ? 'center' : undefined}
+                variant="subtitle2"
+                style={{ fontSize: '1.5rem' }}
+              >
                 Take advantage of the 21st Century.
               </Typography>
-              <Grid container justify={matchesSM ? 'center' : undefined} item>
+              <Grid container justify={matchesMD ? 'center' : undefined} item>
                 <Button
                   component={Link}
                   to="/revolution"
