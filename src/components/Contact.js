@@ -88,17 +88,20 @@ const Contact = (props) => {
   const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [name, setName] = useState('');
+
   const [email, setEmail] = useState('');
   const [emailHelper, setEmailHelper] = useState('');
+
   const [phone, setPhone] = useState('');
   const [phoneHelper, setPhoneHelper] = useState('');
+
   const [message, setMessage] = useState('');
 
   const onChange = (event) => {
     let valid;
 
     switch (event.target.id) {
-      case email:
+      case 'email':
         setEmail(event.target.value);
         valid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
           event.target.value
@@ -110,7 +113,7 @@ const Contact = (props) => {
         }
         break;
 
-      case phone:
+      case 'phone':
         setPhone(event.target.value);
         valid = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(
           event.target.value
@@ -173,7 +176,13 @@ const Contact = (props) => {
                   variant="body1"
                   style={{ color: theme.palette.common.blue, fontSize: '1rem' }}
                 >
-                  (555) 555-5555
+                  <a
+                    href="tel:5555555555"
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    {' '}
+                    (555) 555-5555
+                  </a>
                 </Typography>
               </Grid>
             </Grid>
@@ -190,7 +199,13 @@ const Contact = (props) => {
                   variant="body1"
                   style={{ color: theme.palette.common.blue, fontSize: '1rem' }}
                 >
-                  johndoe@gmail.com
+                  <a
+                    href="mailto:johndoe@gmail.com"
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    {' '}
+                    johndoe@gmail.com{' '}
+                  </a>
                 </Typography>
               </Grid>
             </Grid>
@@ -213,6 +228,7 @@ const Contact = (props) => {
                 <TextField
                   label="Email"
                   error={emailHelper.length !== 0}
+                  helperText={emailHelper}
                   id="email"
                   fullWidth
                   value={email}
@@ -223,6 +239,7 @@ const Contact = (props) => {
                 <TextField
                   label="Phone"
                   error={phoneHelper.length !== 0}
+                  helperText={phoneHelper}
                   id="phone"
                   fullWidth
                   value={phone}
@@ -243,7 +260,16 @@ const Contact = (props) => {
               />
             </Grid>
             <Grid item container justify="center" style={{ marginTop: '2em' }}>
-              <Button variant="contained" className={classes.sendButton}>
+              <Button
+                disabled={
+                  name.length === 0 ||
+                  message.length === 0 ||
+                  phoneHelper.length !== 0 ||
+                  emailHelper !== 0
+                }
+                variant="contained"
+                className={classes.sendButton}
+              >
                 Send Message{' '}
                 <img
                   src={airplane}
