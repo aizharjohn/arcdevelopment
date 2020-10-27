@@ -1,8 +1,7 @@
 const functions = require('firebase-functions');
-const config = functions.config();
 const admin = require('firebase-admin');
 const nodemailer = require('nodemailer');
-const { error } = require('firebase-functions/lib/logger');
+const config = functions.config();
 
 admin.initializeApp();
 
@@ -29,7 +28,7 @@ exports.sendMail = functions.https.onRequest((request, response) => {
     if (error) {
       response.send(error);
     } else {
-      response.send('Message sent successful');
+      response.send('Message sent successfully');
     }
   });
 });
