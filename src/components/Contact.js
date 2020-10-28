@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import {
@@ -9,6 +10,7 @@ import {
   useMediaQuery,
   Dialog,
   DialogContent,
+  CircularProgress,
 } from '@material-ui/core';
 
 import ButtonArrow from './ui/ButtonArrow';
@@ -137,6 +139,15 @@ const Contact = (props) => {
       default:
         break;
     }
+  };
+
+  const onConfirm = () => {
+    axios
+      .get(
+        'https://us-central1-material-ui-course-6e399.cloudfunctions.net/sendMail'
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -394,7 +405,7 @@ const Contact = (props) => {
                 }
                 variant="contained"
                 className={classes.sendButton}
-                onClick={() => setOpen(true)}
+                onClick={onConfirm}
               >
                 Send Message{' '}
                 <img
