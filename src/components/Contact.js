@@ -11,6 +11,7 @@ import {
   Dialog,
   DialogContent,
   CircularProgress,
+  Snackbar,
 } from '@material-ui/core';
 
 import ButtonArrow from './ui/ButtonArrow';
@@ -108,6 +109,14 @@ const Contact = (props) => {
 
   const [open, setOpen] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
+  const [alert, setAlert] = useState({
+    open: false,
+    message: '',
+    backgroundColor: '',
+  });
+
   const onChange = (event) => {
     let valid;
 
@@ -142,22 +151,49 @@ const Contact = (props) => {
   };
 
   const onConfirm = () => {
+    setLoading(true);
     axios
       .get(
         'https://us-central1-material-ui-course-6e399.cloudfunctions.net/sendMail'
       )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        setLoading(false);
+        setOpen(false);
+        setName('');
+        setEmail('');
+        setPhone('');
+        setMessage('');
+        setAlert({
+          open: true,
+          message: 'Message sent successfully',
+          backgroundColor: '#4bb543',
+        });
+      })
+      .catch((err) => {
+        setLoading(false);
+        setAlert({
+          open: true,
+          message: 'Something went wrong, please try again!',
+          backgroundColor: '#ff3232',
+        });
+      });
   };
 
+  const buttonContents = (
+    <>
+      Send Message{' '}
+      <img src={airplane} alt='airplane' style={{ marginLeft: '1em' }} />
+    </>
+  );
+
   return (
-    <Grid container direction="row">
+    <Grid container direction='row'>
       <Grid
         item
         container
-        direction="column"
-        alignItems="center"
-        justify="center"
+        direction='column'
+        alignItems='center'
+        justify='center'
         style={{
           marginBottom: matchesMD ? '5em' : 0,
           marginTop: matchesSM ? '1em' : matchesMD ? '5em' : 0,
@@ -166,18 +202,18 @@ const Contact = (props) => {
         xl={3}
       >
         <Grid item>
-          <Grid container direction="column">
+          <Grid container direction='column'>
             <Grid item>
               <Typography
                 align={matchesMD ? 'center' : undefined}
                 style={{ lineHeight: 1 }}
-                variant="h2"
+                variant='h2'
               >
                 Contact Us
               </Typography>
               <Typography
                 align={matchesMD ? 'center' : undefined}
-                variant="body1"
+                variant='body1'
                 style={{ color: theme.palette.common.blue }}
               >
                 We're waiting
@@ -187,17 +223,17 @@ const Contact = (props) => {
               <Grid item>
                 <img
                   src={phoneIcon}
-                  alt="phone"
+                  alt='phone'
                   style={{ marginRight: '0.5em' }}
                 />
               </Grid>
               <Grid item>
                 <Typography
-                  variant="body1"
+                  variant='body1'
                   style={{ color: theme.palette.common.blue, fontSize: '1rem' }}
                 >
                   <a
-                    href="tel:5555555555"
+                    href='tel:5555555555'
                     style={{ textDecoration: 'none', color: 'inherit' }}
                   >
                     {' '}
@@ -210,17 +246,17 @@ const Contact = (props) => {
               <Grid item>
                 <img
                   src={emailIcon}
-                  alt="envelope"
+                  alt='envelope'
                   style={{ marginRight: '0.5em', verticalAlign: 'bottom' }}
                 />
               </Grid>
               <Grid item>
                 <Typography
-                  variant="body1"
+                  variant='body1'
                   style={{ color: theme.palette.common.blue, fontSize: '1rem' }}
                 >
                   <a
-                    href="mailto:johndoe@gmail.com"
+                    href='mailto:johndoe@gmail.com'
                     style={{ textDecoration: 'none', color: 'inherit' }}
                   >
                     {' '}
@@ -232,13 +268,13 @@ const Contact = (props) => {
             <Grid
               item
               container
-              direction="column"
+              direction='column'
               style={{ maxWidth: '20em' }}
             >
               <Grid item style={{ marginBottom: '0.5em' }}>
                 <TextField
-                  label="Name"
-                  id="name"
+                  label='Name'
+                  id='name'
                   fullWidth
                   value={name}
                   onChange={(event) => setName(event.target.value)}
@@ -246,10 +282,10 @@ const Contact = (props) => {
               </Grid>
               <Grid item style={{ marginBottom: '0.5em' }}>
                 <TextField
-                  label="Email"
+                  label='Email'
                   error={emailHelper.length !== 0}
                   helperText={emailHelper}
-                  id="email"
+                  id='email'
                   fullWidth
                   value={email}
                   onChange={onChange}
@@ -257,10 +293,10 @@ const Contact = (props) => {
               </Grid>
               <Grid item style={{ marginBottom: '0.5em' }}>
                 <TextField
-                  label="Phone"
+                  label='Phone'
                   error={phoneHelper.length !== 0}
                   helperText={phoneHelper}
-                  id="phone"
+                  id='phone'
                   fullWidth
                   value={phone}
                   onChange={onChange}
@@ -272,14 +308,14 @@ const Contact = (props) => {
                 InputProps={{ disableUnderline: true }}
                 value={message}
                 className={classes.message}
-                id="message"
+                id='message'
                 fullWidth
                 multiline
                 rows={10}
                 onChange={(event) => setMessage(event.target.value)}
               />
             </Grid>
-            <Grid item container justify="center" style={{ marginTop: '2em' }}>
+            <Grid item container justify='center' style={{ marginTop: '2em' }}>
               <Button
                 disabled={
                   name.length === 0 ||
@@ -287,16 +323,11 @@ const Contact = (props) => {
                   phoneHelper.length !== 0 ||
                   emailHelper.length !== 0
                 }
-                variant="contained"
+                variant='contained'
                 className={classes.sendButton}
                 onClick={() => setOpen(true)}
               >
-                Send Message{' '}
-                <img
-                  src={airplane}
-                  alt="airplane"
-                  style={{ marginLeft: '1em' }}
-                />
+                {buttonContents}
               </Button>
             </Grid>
           </Grid>
@@ -329,16 +360,16 @@ const Contact = (props) => {
         }}
       >
         <DialogContent>
-          <Grid container direction="column">
+          <Grid container direction='column'>
             <Grid item>
-              <Typography align="center" variant="h4" gutterBottom>
+              <Typography align='center' variant='h4' gutterBottom>
                 Confirm Message
               </Typography>
             </Grid>
             <Grid item style={{ marginBottom: '0.5em' }}>
               <TextField
-                label="Name"
-                id="name"
+                label='Name'
+                id='name'
                 fullWidth
                 value={name}
                 onChange={(event) => setName(event.target.value)}
@@ -346,10 +377,10 @@ const Contact = (props) => {
             </Grid>
             <Grid item style={{ marginBottom: '0.5em' }}>
               <TextField
-                label="Email"
+                label='Email'
                 error={emailHelper.length !== 0}
                 helperText={emailHelper}
-                id="email"
+                id='email'
                 fullWidth
                 value={email}
                 onChange={onChange}
@@ -357,10 +388,10 @@ const Contact = (props) => {
             </Grid>
             <Grid item style={{ marginBottom: '0.5em' }}>
               <TextField
-                label="Phone"
+                label='Phone'
                 error={phoneHelper.length !== 0}
                 helperText={phoneHelper}
-                id="phone"
+                id='phone'
                 fullWidth
                 value={phone}
                 onChange={onChange}
@@ -372,7 +403,7 @@ const Contact = (props) => {
               InputProps={{ disableUnderline: true }}
               value={message}
               className={classes.message}
-              id="message"
+              id='message'
               fullWidth
               multiline
               rows={10}
@@ -384,12 +415,12 @@ const Contact = (props) => {
             container
             direction={matchesSM ? 'column' : 'row'}
             style={{ marginTop: '2em' }}
-            alignItems="center"
+            alignItems='center'
           >
             <Grid item>
               <Button
                 style={{ fontWeight: 300 }}
-                color="primary"
+                color='primary'
                 onClick={() => setOpen(false)}
               >
                 Cancel
@@ -403,27 +434,34 @@ const Contact = (props) => {
                   phoneHelper.length !== 0 ||
                   emailHelper.length !== 0
                 }
-                variant="contained"
+                variant='contained'
                 className={classes.sendButton}
                 onClick={onConfirm}
               >
-                Send Message{' '}
-                <img
-                  src={airplane}
-                  alt="airplane"
-                  style={{ marginLeft: '1em' }}
-                />
+                {loading ? <CircularProgress size={30} /> : buttonContents}
               </Button>
             </Grid>
           </Grid>
         </DialogContent>
       </Dialog>
+      <Snackbar
+        open={alert.open}
+        message={alert.message}
+        ContentProps={{
+          style: {
+            backgroundColor: alert.backgroundColor,
+          },
+        }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        onClose={() => setAlert({ ...alert, open: false })}
+        autoHideDuration={4000}
+      />
       <Grid
         item
         container
         direction={matchesMD ? 'column' : 'row'}
         className={classes.background}
-        alignItems="center"
+        alignItems='center'
         justify={matchesMD ? 'center' : undefined}
         lg={8}
         xl={9}
@@ -435,16 +473,16 @@ const Contact = (props) => {
             textAlign: matchesMD ? 'center' : 'inherit',
           }}
         >
-          <Grid container direction="column">
+          <Grid container direction='column'>
             <Grid item>
-              <Typography align={matchesMD ? 'center' : undefined} variant="h2">
+              <Typography align={matchesMD ? 'center' : undefined} variant='h2'>
                 Simple Software.
                 <br />
                 Revolutionary Results.
               </Typography>
               <Typography
                 align={matchesMD ? 'center' : undefined}
-                variant="subtitle2"
+                variant='subtitle2'
                 style={{ fontSize: '1.5rem' }}
               >
                 Take advantage of the 21st Century.
@@ -452,8 +490,8 @@ const Contact = (props) => {
               <Grid container justify={matchesMD ? 'center' : undefined} item>
                 <Button
                   component={Link}
-                  to="/revolution"
-                  variant="outlined"
+                  to='/revolution'
+                  variant='outlined'
                   className={classes.learnButton}
                   onClick={() => {
                     props.setValue(2);
@@ -473,8 +511,8 @@ const Contact = (props) => {
         <Grid item>
           <Button
             component={Link}
-            to="/estimate"
-            variant="contained"
+            to='/estimate'
+            variant='contained'
             className={classes.estimateButton}
             onClick={() => {
               props.setValue(5);
