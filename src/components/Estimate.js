@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
+import { cloneDeep } from 'lodash';
 import Lottie from 'react-lottie';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import {
@@ -315,6 +316,8 @@ const Estimate = () => {
   const classes = useStyles();
   const theme = useTheme();
 
+  const [questions, setQuestions] = useState(defaultQuestions);
+
   const defaultOptions = {
     loop: true,
     autoplay: false,
@@ -323,6 +326,8 @@ const Estimate = () => {
       preserveAspectRatio: 'xMidYMid slice',
     },
   };
+
+  const nextQuestion = () => {};
 
   return (
     <Grid container direction="row">
