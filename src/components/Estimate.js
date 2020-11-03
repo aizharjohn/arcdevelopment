@@ -316,7 +316,7 @@ const Estimate = () => {
   const classes = useStyles();
   const theme = useTheme();
 
-  const [questions, setQuestions] = useState(defaultQuestions);
+  const [questions, setQuestions] = useState(softwareQuestions);
 
   const defaultOptions = {
     loop: true,
@@ -327,7 +327,61 @@ const Estimate = () => {
     },
   };
 
-  const nextQuestion = () => {};
+  const nextQuestion = () => {
+    const newQuestions = cloneDeep(questions);
+    const currentlyActive = newQuestions.filter((question) => question.active);
+    const activeIndex = currentlyActive[0].id - 1;
+    const nextIndex = activeIndex + 1;
+
+    newQuestions[activeIndex] = { ...currentlyActive[0], active: false };
+    newQuestions[nextIndex] = { ...newQuestions[nextIndex], active: true };
+
+    setQuestions(newQuestions);
+  };
+
+  const previousQuestion = () => {
+    const newQuestions = cloneDeep(questions);
+    const currentlyActive = newQuestions.filter((question) => question.active);
+    const activeIndex = currentlyActive[0].id - 1;
+    const nextIndex = activeIndex - 1;
+
+    newQuestions[activeIndex] = { ...currentlyActive[0], active: false };
+    newQuestions[nextIndex] = { ...newQuestions[nextIndex], active: true };
+
+    setQuestions(newQuestions);
+  };
+
+  const navigationPreviousDisabled = () => {
+    const currentlyActive = questions.filter((question) => question.active);
+
+    if (currentlyActive[0].id === 1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const navigationNextDisabled = () => {
+    const currentlyActive = questions.filter((question) => question.active);
+
+    if (currentlyActive[0].id === questions[questions.length - 1].id) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const handleSelect = (id) => {
+    const newQuestions = cloneDeep(questions);
+    const currentlyActive = newQuestions.filter((question) => question.active);
+    const activeIndex = currentlyActive[0].id - 1;
+
+    const newSelected = newQuestions[activeIndex].options[id - 1];
+
+    newSelected.selected = !newSelected.selected;
+
+    setQuestions(newQuestions);
+  };
 
   return (
     <Grid container direction="row">
@@ -350,7 +404,7 @@ const Estimate = () => {
         lg
         style={{ marginRight: '2em', marginBottom: '25em' }}
       >
-        {defaultQuestions
+        {questions
           .filter((question) => question.active)
           .map((question, index) => (
             <Fragment key={index}>
@@ -362,6 +416,7 @@ const Estimate = () => {
                     fontWeight: 500,
                     fontSize: '2.25rem',
                     marginTop: '5em',
+                    lineHeight: '1.25',
                   }}
                 >
                   {question.title}
@@ -377,8 +432,24 @@ const Estimate = () => {
               </Grid>
               <Grid item container>
                 {question.options.map((option) => (
-                  <Grid item container direction="column" md>
-                    <Grid item style={{ maxWidth: '12em' }}>
+                  <Grid
+                    item
+                    container
+                    direction="column"
+                    md
+                    component={Button}
+                    onClick={() => handleSelect(option.id)}
+                    disableRipple
+                    style={{
+                      display: 'grid',
+                      textTransform: 'none',
+                      borderRadius: 0,
+                      backgroundColor: option.selected
+                        ? theme.palette.common.orange
+                        : null,
+                    }}
+                  >
+                    <Grid item style={{ maxWidth: '14em' }}>
                       <Typography
                         variant="h6"
                         align="center"
@@ -407,13 +478,33 @@ const Estimate = () => {
           item
           container
           justify="space-between"
-          style={{ width: '15em', marginTop: '3em' }}
+          style={{ width: '18em', marginTop: '3em' }}
         >
           <Grid item>
-            <img src={backArrow} alt="previous question" />
+            <IconButton
+              disabled={navigationPreviousDisabled()}
+              onClick={previousQuestion}
+            >
+              <img
+                src={
+                  navigationPreviousDisabled() ? backArrowDisabled : backArrow
+                }
+                alt="previous question"
+              />
+            </IconButton>
           </Grid>
           <Grid item>
-            <img src={forwardArrow} alt="next question" />
+            <IconButton
+              disabled={navigationNextDisabled()}
+              onClick={nextQuestion}
+            >
+              <img
+                src={
+                  navigationNextDisabled() ? forwardArrowDisabled : forwardArrow
+                }
+                alt="next question"
+              />
+            </IconButton>
           </Grid>
         </Grid>
         <Grid item>
