@@ -329,7 +329,7 @@ const Estimate = () => {
   const classes = useStyles();
   const theme = useTheme();
 
-  const [questions, setQuestions] = useState(softwareQuestions);
+  const [questions, setQuestions] = useState(defaultQuestions);
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const [name, setName] = useState('');
@@ -342,6 +342,13 @@ const Estimate = () => {
   const [message, setMessage] = useState('');
 
   const [total, setTotal] = useState(0);
+
+  const [service, setService] = useState([]);
+  const [platforms, setPlatforms] = useState([]);
+  const [features, setFeatures] = useState([]);
+  const [customFeatures, setCustomFeatures] = useState('');
+  const [category, setCategory] = useState('');
+  const [users, setUsers] = useState('');
 
   const defaultOptions = {
     loop: true,
@@ -402,10 +409,37 @@ const Estimate = () => {
     const activeIndex = currentlyActive[0].id - 1;
 
     const newSelected = newQuestions[activeIndex].options[id - 1];
+    const previousSelected = currentlyActive[0].options.filter(
+      (option) => option.selected
+    );
 
-    newSelected.selected = !newSelected.selected;
+    switch (currentlyActive[0].subtitle) {
+      case 'Select one.':
+        if (previousSelected[0]) {
+          previousSelected[0].selected = !previousSelected[0].selected;
+        }
+        newSelected.selected = !newSelected.selected;
+        break;
 
-    setQuestions(newQuestions);
+      default:
+        newSelected.selected = !newSelected.selected;
+        break;
+    }
+
+    switch (newSelected.title) {
+      case 'Custom Software Development':
+        setQuestions(softwareQuestions);
+        break;
+      case 'iOS/Android App Development':
+        setQuestions(softwareQuestions);
+        break;
+      case 'Website Development':
+        setQuestions(websiteQuestions);
+        break;
+      default:
+        setQuestions(newQuestions);
+        break;
+    }
   };
 
   const onChange = (event) => {
@@ -615,7 +649,7 @@ const Estimate = () => {
         </Grid>
         <DialogContent>
           <Grid container>
-            <Grid item container direction="column">
+            <Grid item container direction="column" md={7}>
               <Grid item style={{ marginBottom: '0.5em' }}>
                 <TextField
                   label="Name"
@@ -647,29 +681,77 @@ const Estimate = () => {
                   onChange={onChange}
                 />
               </Grid>
+              <Grid item style={{ maxWidth: '20em' }}>
+                <TextField
+                  InputProps={{ disableUnderline: true }}
+                  value={message}
+                  className={classes.message}
+                  id="message"
+                  fullWidth
+                  multiline
+                  rows={10}
+                  onChange={(event) => setMessage(event.target.value)}
+                />
+              </Grid>
+              <Grid item>
+                <Typography variant="body1" paragraph>
+                  We can create this digital solution for an estimated{' '}
+                  <span className={classes.specialText}>
+                    ${total.toFixed(2)}
+                  </span>
+                </Typography>
+                <Typography variant="body1" paragraph>
+                  Fill out your name, phone number, and email, place your
+                  request, and we'll get back to you with details moving forward
+                  and a final price.
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item style={{ maxWidth: '20em' }}>
-              <TextField
-                InputProps={{ disableUnderline: true }}
-                value={message}
-                className={classes.message}
-                id="message"
-                fullWidth
-                multiline
-                rows={10}
-                onChange={(event) => setMessage(event.target.value)}
-              />
-            </Grid>
-            <Grid item>
-              <Typography variant="body1" paragraph>
-                We can create this digital solution for an estimated{' '}
-                <span className={classes.specialText}>${total.toFixed(2)}</span>
-              </Typography>
-              <Typography variant="body1" paragraph>
-                Fill out your name, phone number, and email, place your request,
-                and we'll get back to you with details moving forward and a
-                final price.
-              </Typography>
+            <Grid item container direction="column" md={5}>
+              <Grid item>
+                <Grid container direction="column">
+                  <Grid item container alignItems="center">
+                    <Grid item>
+                      <img src={check} alt="checkmark" />
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="body1">
+                        First options check
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid item container alignItems="center">
+                    <Grid item>
+                      <img src={check} alt="checkmark" />
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="body1">
+                        Second options check
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid item container alignItems="center">
+                    <Grid item>
+                      <img src={check} alt="checkmark" />
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="body1">
+                        Third options check
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item>
+                <Button variant="contained" className={classes.estimateButton}>
+                  Place Request
+                  <img
+                    src={send}
+                    alt="paper airplane"
+                    style={{ marginLeft: '0.5 em' }}
+                  />
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
         </DialogContent>
