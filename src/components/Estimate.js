@@ -429,16 +429,18 @@ const Estimate = () => {
     switch (newSelected.title) {
       case 'Custom Software Development':
         setQuestions(softwareQuestions);
+        setService(newSelected.title);
         break;
       case 'iOS/Android App Development':
         setQuestions(softwareQuestions);
+        setService(newSelected.title);
         break;
       case 'Website Development':
         setQuestions(websiteQuestions);
+        setService(newSelected.title);
         break;
       default:
         setQuestions(newQuestions);
-        break;
     }
   };
 
@@ -503,23 +505,23 @@ const Estimate = () => {
   };
 
   return (
-    <Grid container direction="row">
-      <Grid item container direction="column" lg>
+    <Grid container direction='row'>
+      <Grid item container direction='column' lg>
         <Grid item style={{ marginTop: '2em', marginLeft: '5em' }}>
-          <Typography variant="h2">Estimate</Typography>
+          <Typography variant='h2'>Estimate</Typography>
         </Grid>
         <Grid
           item
           style={{ marginRight: '10em', maxWidth: '50em', marginTop: '7.5em' }}
         >
-          <Lottie options={defaultOptions} height="100%" width="100%" />
+          <Lottie options={defaultOptions} height='100%' width='100%' />
         </Grid>
       </Grid>
       <Grid
         item
         container
-        direction="column"
-        alignItems="center"
+        direction='column'
+        alignItems='center'
         lg
         style={{ marginRight: '2em', marginBottom: '25em' }}
       >
@@ -529,8 +531,8 @@ const Estimate = () => {
             <Fragment key={index}>
               <Grid item>
                 <Typography
-                  variant="h2"
-                  align="center"
+                  variant='h2'
+                  align='center'
                   style={{
                     fontWeight: 500,
                     fontSize: '2.25rem',
@@ -541,8 +543,8 @@ const Estimate = () => {
                   {question.title}
                 </Typography>
                 <Typography
-                  variant="body1"
-                  align="center"
+                  variant='body1'
+                  align='center'
                   style={{ marginBottom: '2.5em' }}
                   gutterBottom
                 >
@@ -554,7 +556,7 @@ const Estimate = () => {
                   <Grid
                     item
                     container
-                    direction="column"
+                    direction='column'
                     md
                     component={Button}
                     onClick={() => handleSelect(option.id)}
@@ -570,13 +572,13 @@ const Estimate = () => {
                   >
                     <Grid item style={{ maxWidth: '14em' }}>
                       <Typography
-                        variant="h6"
-                        align="center"
+                        variant='h6'
+                        align='center'
                         style={{ marginBottom: '1em' }}
                       >
                         {option.title}
                       </Typography>
-                      <Typography variant="caption" align="center">
+                      <Typography variant='caption' align='center'>
                         {option.subtitle}
                       </Typography>
                     </Grid>
@@ -596,7 +598,7 @@ const Estimate = () => {
         <Grid
           item
           container
-          justify="space-between"
+          justify='space-between'
           style={{ width: '18em', marginTop: '3em' }}
         >
           <Grid item>
@@ -608,7 +610,7 @@ const Estimate = () => {
                 src={
                   navigationPreviousDisabled() ? backArrowDisabled : backArrow
                 }
-                alt="previous question"
+                alt='previous question'
               />
             </IconButton>
           </Grid>
@@ -621,14 +623,14 @@ const Estimate = () => {
                 src={
                   navigationNextDisabled() ? forwardArrowDisabled : forwardArrow
                 }
-                alt="next question"
+                alt='next question'
               />
             </IconButton>
           </Grid>
         </Grid>
         <Grid item>
           <Button
-            variant="contained"
+            variant='contained'
             className={classes.estimateButton}
             onClick={() => {
               setDialogOpen(true);
@@ -640,20 +642,20 @@ const Estimate = () => {
         </Grid>
       </Grid>
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
-        <Grid container justify="center">
+        <Grid container justify='center'>
           <Grid item>
-            <Typography variant="h2" align="center">
+            <Typography variant='h2' align='center'>
               Estimate
             </Typography>
           </Grid>
         </Grid>
         <DialogContent>
           <Grid container>
-            <Grid item container direction="column" md={7}>
+            <Grid item container direction='column' md={7}>
               <Grid item style={{ marginBottom: '0.5em' }}>
                 <TextField
-                  label="Name"
-                  id="name"
+                  label='Name'
+                  id='name'
                   fullWidth
                   value={name}
                   onChange={(event) => setName(event.target.value)}
@@ -661,10 +663,10 @@ const Estimate = () => {
               </Grid>
               <Grid item style={{ marginBottom: '0.5em' }}>
                 <TextField
-                  label="Email"
+                  label='Email'
                   error={emailHelper.length !== 0}
                   helperText={emailHelper}
-                  id="email"
+                  id='email'
                   fullWidth
                   value={email}
                   onChange={onChange}
@@ -672,10 +674,10 @@ const Estimate = () => {
               </Grid>
               <Grid item style={{ marginBottom: '0.5em' }}>
                 <TextField
-                  label="Phone"
+                  label='Phone'
                   error={phoneHelper.length !== 0}
                   helperText={phoneHelper}
-                  id="phone"
+                  id='phone'
                   fullWidth
                   value={phone}
                   onChange={onChange}
@@ -686,7 +688,7 @@ const Estimate = () => {
                   InputProps={{ disableUnderline: true }}
                   value={message}
                   className={classes.message}
-                  id="message"
+                  id='message'
                   fullWidth
                   multiline
                   rows={10}
@@ -694,48 +696,48 @@ const Estimate = () => {
                 />
               </Grid>
               <Grid item>
-                <Typography variant="body1" paragraph>
+                <Typography variant='body1' paragraph>
                   We can create this digital solution for an estimated{' '}
                   <span className={classes.specialText}>
                     ${total.toFixed(2)}
                   </span>
                 </Typography>
-                <Typography variant="body1" paragraph>
+                <Typography variant='body1' paragraph>
                   Fill out your name, phone number, and email, place your
                   request, and we'll get back to you with details moving forward
                   and a final price.
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item container direction="column" md={5}>
+            <Grid item container direction='column' md={5}>
               <Grid item>
-                <Grid container direction="column">
-                  <Grid item container alignItems="center">
+                <Grid container direction='column'>
+                  <Grid item container alignItems='center'>
                     <Grid item>
-                      <img src={check} alt="checkmark" />
+                      <img src={check} alt='checkmark' />
                     </Grid>
                     <Grid item>
-                      <Typography variant="body1">
-                        First options check
+                      <Typography variant='body1'>
+                        You want {service}
                       </Typography>
                     </Grid>
                   </Grid>
-                  <Grid item container alignItems="center">
+                  <Grid item container alignItems='center'>
                     <Grid item>
-                      <img src={check} alt="checkmark" />
+                      <img src={check} alt='checkmark' />
                     </Grid>
                     <Grid item>
-                      <Typography variant="body1">
+                      <Typography variant='body1'>
                         Second options check
                       </Typography>
                     </Grid>
                   </Grid>
-                  <Grid item container alignItems="center">
+                  <Grid item container alignItems='center'>
                     <Grid item>
-                      <img src={check} alt="checkmark" />
+                      <img src={check} alt='checkmark' />
                     </Grid>
                     <Grid item>
-                      <Typography variant="body1">
+                      <Typography variant='body1'>
                         Third options check
                       </Typography>
                     </Grid>
@@ -743,11 +745,11 @@ const Estimate = () => {
                 </Grid>
               </Grid>
               <Grid item>
-                <Button variant="contained" className={classes.estimateButton}>
+                <Button variant='contained' className={classes.estimateButton}>
                   Place Request
                   <img
                     src={send}
-                    alt="paper airplane"
+                    alt='paper airplane'
                     style={{ marginLeft: '0.5 em' }}
                   />
                 </Button>
