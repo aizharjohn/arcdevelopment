@@ -495,33 +495,85 @@ const Estimate = () => {
           question.options.filter((option) => option.selected)
         )[0][0].cost;
 
+      setUsers(userCost.title);
+
       cost -= userCost;
       cost *= userCost;
-
-      console.log(cost);
     }
 
     setTotal(cost);
   };
 
+  const getPlatforms = () => {
+    let newPlatforms = [];
+
+    if (questions.length > 2) {
+      questions
+        .filter(
+          (question) =>
+            question.title === 'Which platforms do you need supported?'
+        )
+        .map((question) =>
+          question.options.filter((option) => option.selected)
+        )[0]
+        .map((option) => newPlatforms.push(option.title));
+
+      setPlatforms(newPlatforms);
+    }
+  };
+
+  const getFeatures = () => {
+    let newFeatures = [];
+
+    if (questions.length > 2) {
+      questions
+        .filter(
+          (question) =>
+            question.title === 'Which features do you expect to use?'
+        )
+        .map((question) => question.options.filter((option) => option.selected))
+        .map((option) =>
+          option.map((newFeature) => newFeatures.push(newFeature.title))
+        );
+
+      setFeatures(newFeatures);
+    }
+  };
+
+  const getCustomFeatures = () => {
+    if (questions.length > 2) {
+      const newCustomFeatures = questions
+        .filter(
+          (question) =>
+            question.title ===
+            'What type of custom features do you expect to need?'
+        )
+        .map((question) =>
+          question.options.filter((option) => option.selected)
+        )[0][0].title;
+
+      setCustomFeatures(newCustomFeatures);
+    }
+  };
+
   return (
-    <Grid container direction='row'>
-      <Grid item container direction='column' lg>
+    <Grid container direction="row">
+      <Grid item container direction="column" lg>
         <Grid item style={{ marginTop: '2em', marginLeft: '5em' }}>
-          <Typography variant='h2'>Estimate</Typography>
+          <Typography variant="h2">Estimate</Typography>
         </Grid>
         <Grid
           item
           style={{ marginRight: '10em', maxWidth: '50em', marginTop: '7.5em' }}
         >
-          <Lottie options={defaultOptions} height='100%' width='100%' />
+          <Lottie options={defaultOptions} height="100%" width="100%" />
         </Grid>
       </Grid>
       <Grid
         item
         container
-        direction='column'
-        alignItems='center'
+        direction="column"
+        alignItems="center"
         lg
         style={{ marginRight: '2em', marginBottom: '25em' }}
       >
@@ -531,8 +583,8 @@ const Estimate = () => {
             <Fragment key={index}>
               <Grid item>
                 <Typography
-                  variant='h2'
-                  align='center'
+                  variant="h2"
+                  align="center"
                   style={{
                     fontWeight: 500,
                     fontSize: '2.25rem',
@@ -543,8 +595,8 @@ const Estimate = () => {
                   {question.title}
                 </Typography>
                 <Typography
-                  variant='body1'
-                  align='center'
+                  variant="body1"
+                  align="center"
                   style={{ marginBottom: '2.5em' }}
                   gutterBottom
                 >
@@ -556,7 +608,7 @@ const Estimate = () => {
                   <Grid
                     item
                     container
-                    direction='column'
+                    direction="column"
                     md
                     component={Button}
                     onClick={() => handleSelect(option.id)}
@@ -572,13 +624,13 @@ const Estimate = () => {
                   >
                     <Grid item style={{ maxWidth: '14em' }}>
                       <Typography
-                        variant='h6'
-                        align='center'
+                        variant="h6"
+                        align="center"
                         style={{ marginBottom: '1em' }}
                       >
                         {option.title}
                       </Typography>
-                      <Typography variant='caption' align='center'>
+                      <Typography variant="caption" align="center">
                         {option.subtitle}
                       </Typography>
                     </Grid>
@@ -598,7 +650,7 @@ const Estimate = () => {
         <Grid
           item
           container
-          justify='space-between'
+          justify="space-between"
           style={{ width: '18em', marginTop: '3em' }}
         >
           <Grid item>
@@ -610,7 +662,7 @@ const Estimate = () => {
                 src={
                   navigationPreviousDisabled() ? backArrowDisabled : backArrow
                 }
-                alt='previous question'
+                alt="previous question"
               />
             </IconButton>
           </Grid>
@@ -623,18 +675,21 @@ const Estimate = () => {
                 src={
                   navigationNextDisabled() ? forwardArrowDisabled : forwardArrow
                 }
-                alt='next question'
+                alt="next question"
               />
             </IconButton>
           </Grid>
         </Grid>
         <Grid item>
           <Button
-            variant='contained'
+            variant="contained"
             className={classes.estimateButton}
             onClick={() => {
               setDialogOpen(true);
               getTotal();
+              getPlatforms();
+              getFeatures();
+              getCustomFeatures();
             }}
           >
             Get Estimate
@@ -642,20 +697,20 @@ const Estimate = () => {
         </Grid>
       </Grid>
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
-        <Grid container justify='center'>
+        <Grid container justify="center">
           <Grid item>
-            <Typography variant='h2' align='center'>
+            <Typography variant="h2" align="center">
               Estimate
             </Typography>
           </Grid>
         </Grid>
         <DialogContent>
           <Grid container>
-            <Grid item container direction='column' md={7}>
+            <Grid item container direction="column" md={7}>
               <Grid item style={{ marginBottom: '0.5em' }}>
                 <TextField
-                  label='Name'
-                  id='name'
+                  label="Name"
+                  id="name"
                   fullWidth
                   value={name}
                   onChange={(event) => setName(event.target.value)}
@@ -663,10 +718,10 @@ const Estimate = () => {
               </Grid>
               <Grid item style={{ marginBottom: '0.5em' }}>
                 <TextField
-                  label='Email'
+                  label="Email"
                   error={emailHelper.length !== 0}
                   helperText={emailHelper}
-                  id='email'
+                  id="email"
                   fullWidth
                   value={email}
                   onChange={onChange}
@@ -674,10 +729,10 @@ const Estimate = () => {
               </Grid>
               <Grid item style={{ marginBottom: '0.5em' }}>
                 <TextField
-                  label='Phone'
+                  label="Phone"
                   error={phoneHelper.length !== 0}
                   helperText={phoneHelper}
-                  id='phone'
+                  id="phone"
                   fullWidth
                   value={phone}
                   onChange={onChange}
@@ -688,7 +743,7 @@ const Estimate = () => {
                   InputProps={{ disableUnderline: true }}
                   value={message}
                   className={classes.message}
-                  id='message'
+                  id="message"
                   fullWidth
                   multiline
                   rows={10}
@@ -696,60 +751,117 @@ const Estimate = () => {
                 />
               </Grid>
               <Grid item>
-                <Typography variant='body1' paragraph>
+                <Typography variant="body1" paragraph>
                   We can create this digital solution for an estimated{' '}
                   <span className={classes.specialText}>
                     ${total.toFixed(2)}
                   </span>
                 </Typography>
-                <Typography variant='body1' paragraph>
+                <Typography variant="body1" paragraph>
                   Fill out your name, phone number, and email, place your
                   request, and we'll get back to you with details moving forward
                   and a final price.
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item container direction='column' md={5}>
+            <Grid item container direction="column" md={5}>
               <Grid item>
-                <Grid container direction='column'>
-                  <Grid item container alignItems='center'>
+                <Grid container direction="column">
+                  <Grid item container alignItems="center">
                     <Grid item>
-                      <img src={check} alt='checkmark' />
+                      <img src={check} alt="checkmark" />
                     </Grid>
                     <Grid item>
-                      <Typography variant='body1'>
+                      <Typography variant="body1">
                         You want {service}
+                        {platforms.length > 0
+                          ? ` for ${
+                              //if only web application is selected...
+                              platforms.indexOf('Web Application') > -1 &&
+                              platforms.length === 1
+                                ? //then finish sentence here
+                                  'a Web Application.'
+                                : //otherwise, if web application and another platform is selected...
+                                platforms.indexOf('Web Application') > -1 &&
+                                  platforms.length === 2
+                                ? //then finish the sentence here
+                                  `a Web Application and an ${platforms[1]}.`
+                                : //otherwise, if only one platform is selected which isn't web application...
+                                platforms.length === 1
+                                ? //then finish the sentence here
+                                  `an ${platforms[0]}`
+                                : //otherwise, if other two options are selected...
+                                platforms.length === 2
+                                ? //then finish the sentence here
+                                  'an iOS Application and an Android Application.'
+                                : //otherwise if all three are selected...
+                                platforms.length === 3
+                                ? //then finish the sentence here
+                                  'a Web Application, an iOS Application, and an Android Application.'
+                                : null
+                            }`
+                          : null}
                       </Typography>
                     </Grid>
                   </Grid>
-                  <Grid item container alignItems='center'>
+                  <Grid item container alignItems="center">
                     <Grid item>
-                      <img src={check} alt='checkmark' />
+                      <img src={check} alt="checkmark" />
                     </Grid>
                     <Grid item>
-                      <Typography variant='body1'>
-                        Second options check
+                      <Typography variant="body1">
+                        {'with '}
+                        {/* if we have features... */}
+                        {features.length > 0
+                          ? //...and there's only 1...
+                            features.length === 1
+                            ? //then end the sentence here
+                              `${features[0]}.`
+                            : //otherwise, if there are two features...
+                            features.length === 2
+                            ? //...then end the sentence here
+                              `${features[0]} and ${features[1]}.`
+                            : //otherwise, if there are three or more features...
+                              features
+                                //filter out the very last feature...
+                                .filter(
+                                  (feature, index) =>
+                                    index !== features.length - 1
+                                )
+                                //and for those features return their name...
+                                .map((feature, index) => (
+                                  <span key={index}>{`${feature}, `}</span>
+                                ))
+                          : null}
+                        {features.length > 0 &&
+                        features.length !== 1 &&
+                        features.length !== 2
+                          ? //...and then finally add the last feature with 'and' in front of it
+                            ` and ${features[features.length - 1]}.`
+                          : null}
                       </Typography>
                     </Grid>
                   </Grid>
-                  <Grid item container alignItems='center'>
+                  <Grid item container alignItems="center">
                     <Grid item>
-                      <img src={check} alt='checkmark' />
+                      <img src={check} alt="checkmark" />
                     </Grid>
                     <Grid item>
-                      <Typography variant='body1'>
-                        Third options check
+                      <Typography variant="body1">
+                        The custom features will be of{' '}
+                        {customFeatures.toLowerCase()}
+                        {`, and the project will be used by about ${users} users.`}
                       </Typography>
                     </Grid>
                   </Grid>
                 </Grid>
               </Grid>
               <Grid item>
-                <Button variant='contained' className={classes.estimateButton}>
+                <Button variant="contained" className={classes.estimateButton}>
                   Place Request
                   <img
                     src={send}
-                    alt='paper airplane'
+                    alt="paper airplane"
                     style={{ marginLeft: '0.5 em' }}
                   />
                 </Button>
