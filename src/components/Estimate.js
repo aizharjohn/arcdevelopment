@@ -430,14 +430,29 @@ const Estimate = () => {
       case 'Custom Software Development':
         setQuestions(softwareQuestions);
         setService(newSelected.title);
+        setPlatforms([]);
+        setFeatures([]);
+        setCustomFeatures('');
+        setCategory('');
+        setUsers('');
         break;
       case 'iOS/Android App Development':
         setQuestions(softwareQuestions);
         setService(newSelected.title);
+        setPlatforms([]);
+        setFeatures([]);
+        setCustomFeatures('');
+        setCategory('');
+        setUsers('');
         break;
       case 'Website Development':
         setQuestions(websiteQuestions);
         setService(newSelected.title);
+        setPlatforms([]);
+        setFeatures([]);
+        setCustomFeatures('');
+        setCategory('');
+        setUsers('');
         break;
       default:
         setQuestions(newQuestions);
@@ -555,6 +570,135 @@ const Estimate = () => {
       setCustomFeatures(newCustomFeatures);
     }
   };
+
+  const getCategory = () => {
+    if (questions.length === 2) {
+      const newCategory = questions
+        .filter(
+          (question) =>
+            question.title === 'Which type of website are you wanting?'
+        )[0]
+        .options.filter((option) => option.selected)[0].title;
+
+      setCategory(newCategory);
+    }
+  };
+
+  const softwareSelection = (
+    <Grid container direction="column">
+      <Grid
+        item
+        container
+        alignItems="center"
+        style={{ marginBottom: '1.25em' }}
+      >
+        <Grid item xs={2}>
+          <img src={check} alt="checkmark" />
+        </Grid>
+        <Grid item xs={10}>
+          <Typography variant="body1">
+            You want {service}
+            {platforms.length > 0
+              ? ` for ${
+                  //if only web application is selected...
+                  platforms.indexOf('Web Application') > -1 &&
+                  platforms.length === 1
+                    ? //then finish sentence here
+                      'a Web Application.'
+                    : //otherwise, if web application and another platform is selected...
+                    platforms.indexOf('Web Application') > -1 &&
+                      platforms.length === 2
+                    ? //then finish the sentence here
+                      `a Web Application and an ${platforms[1]}.`
+                    : //otherwise, if only one platform is selected which isn't web application...
+                    platforms.length === 1
+                    ? //then finish the sentence here
+                      `an ${platforms[0]}`
+                    : //otherwise, if other two options are selected...
+                    platforms.length === 2
+                    ? //then finish the sentence here
+                      'an iOS Application and an Android Application.'
+                    : //otherwise if all three are selected...
+                    platforms.length === 3
+                    ? //then finish the sentence here
+                      'a Web Application, an iOS Application, and an Android Application.'
+                    : null
+                }`
+              : null}
+          </Typography>
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        container
+        alignItems="center"
+        style={{ marginBottom: '1.25em' }}
+      >
+        <Grid item xs={2}>
+          <img src={check} alt="checkmark" />
+        </Grid>
+        <Grid item xs={10}>
+          <Typography variant="body1">
+            {'with '}
+            {/* if we have features... */}
+            {features.length > 0
+              ? //...and there's only 1...
+                features.length === 1
+                ? //then end the sentence here
+                  `${features[0]}.`
+                : //otherwise, if there are two features...
+                features.length === 2
+                ? //...then end the sentence here
+                  `${features[0]} and ${features[1]}.`
+                : //otherwise, if there are three or more features...
+                  features
+                    //filter out the very last feature...
+                    .filter((feature, index) => index !== features.length - 1)
+                    //and for those features return their name...
+                    .map((feature, index) => (
+                      <span key={index}>{`${feature}, `}</span>
+                    ))
+              : null}
+            {features.length > 0 &&
+            features.length !== 1 &&
+            features.length !== 2
+              ? //...and then finally add the last feature with 'and' in front of it
+                ` and ${features[features.length - 1]}.`
+              : null}
+          </Typography>
+        </Grid>
+      </Grid>
+      <Grid item container alignItems="center">
+        <Grid item xs={2}>
+          <img src={check} alt="checkmark" />
+        </Grid>
+        <Grid item xs={10}>
+          <Typography variant="body1">
+            The custom features will be of {customFeatures.toLowerCase()}
+            {`, and the project will be used by about ${users} users.`}
+          </Typography>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+
+  const websiteSelection = (
+    <Grid container direction="column">
+      <Grid item container alignItems="center">
+        <Grid item xs={2}>
+          <img src={check} alt="checkmark" />
+        </Grid>
+        <Grid item xs={10}>
+          <Typography variant="body1">
+            You want{' '}
+            {category === 'Basic'
+              ? 'a Basic Website.'
+              : `an ${category} Website.`}
+          </Typography>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
 
   return (
     <Grid container direction="row">
@@ -690,13 +834,19 @@ const Estimate = () => {
               getPlatforms();
               getFeatures();
               getCustomFeatures();
+              getCategory();
             }}
           >
             Get Estimate
           </Button>
         </Grid>
       </Grid>
-      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+      <Dialog
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        fullWidth
+        maxWidth="lg"
+      >
         <Grid container justify="center">
           <Grid item>
             <Typography variant="h2" align="center">
@@ -705,8 +855,14 @@ const Estimate = () => {
           </Grid>
         </Grid>
         <DialogContent>
-          <Grid container>
-            <Grid item container direction="column" md={7}>
+          <Grid container justify="space-around">
+            <Grid
+              item
+              container
+              direction="column"
+              md={7}
+              style={{ maxWidth: '20em' }}
+            >
               <Grid item style={{ marginBottom: '0.5em' }}>
                 <TextField
                   label="Name"
@@ -764,97 +920,15 @@ const Estimate = () => {
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item container direction="column" md={5}>
+            <Grid
+              item
+              container
+              direction="column"
+              md={5}
+              style={{ maxWidth: '30em' }}
+            >
               <Grid item>
-                <Grid container direction="column">
-                  <Grid item container alignItems="center">
-                    <Grid item>
-                      <img src={check} alt="checkmark" />
-                    </Grid>
-                    <Grid item>
-                      <Typography variant="body1">
-                        You want {service}
-                        {platforms.length > 0
-                          ? ` for ${
-                              //if only web application is selected...
-                              platforms.indexOf('Web Application') > -1 &&
-                              platforms.length === 1
-                                ? //then finish sentence here
-                                  'a Web Application.'
-                                : //otherwise, if web application and another platform is selected...
-                                platforms.indexOf('Web Application') > -1 &&
-                                  platforms.length === 2
-                                ? //then finish the sentence here
-                                  `a Web Application and an ${platforms[1]}.`
-                                : //otherwise, if only one platform is selected which isn't web application...
-                                platforms.length === 1
-                                ? //then finish the sentence here
-                                  `an ${platforms[0]}`
-                                : //otherwise, if other two options are selected...
-                                platforms.length === 2
-                                ? //then finish the sentence here
-                                  'an iOS Application and an Android Application.'
-                                : //otherwise if all three are selected...
-                                platforms.length === 3
-                                ? //then finish the sentence here
-                                  'a Web Application, an iOS Application, and an Android Application.'
-                                : null
-                            }`
-                          : null}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                  <Grid item container alignItems="center">
-                    <Grid item>
-                      <img src={check} alt="checkmark" />
-                    </Grid>
-                    <Grid item>
-                      <Typography variant="body1">
-                        {'with '}
-                        {/* if we have features... */}
-                        {features.length > 0
-                          ? //...and there's only 1...
-                            features.length === 1
-                            ? //then end the sentence here
-                              `${features[0]}.`
-                            : //otherwise, if there are two features...
-                            features.length === 2
-                            ? //...then end the sentence here
-                              `${features[0]} and ${features[1]}.`
-                            : //otherwise, if there are three or more features...
-                              features
-                                //filter out the very last feature...
-                                .filter(
-                                  (feature, index) =>
-                                    index !== features.length - 1
-                                )
-                                //and for those features return their name...
-                                .map((feature, index) => (
-                                  <span key={index}>{`${feature}, `}</span>
-                                ))
-                          : null}
-                        {features.length > 0 &&
-                        features.length !== 1 &&
-                        features.length !== 2
-                          ? //...and then finally add the last feature with 'and' in front of it
-                            ` and ${features[features.length - 1]}.`
-                          : null}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                  <Grid item container alignItems="center">
-                    <Grid item>
-                      <img src={check} alt="checkmark" />
-                    </Grid>
-                    <Grid item>
-                      <Typography variant="body1">
-                        The custom features will be of{' '}
-                        {customFeatures.toLowerCase()}
-                        {`, and the project will be used by about ${users} users.`}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
+                {questions.length > 2 ? softwareSelection : websiteSelection}
               </Grid>
               <Grid item>
                 <Button variant="contained" className={classes.estimateButton}>
