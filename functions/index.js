@@ -27,32 +27,66 @@ let mailOptions = {
 //
 exports.sendMail = functions.https.onRequest((request, response) => {
   cors(request, response, () => {
-    const { name, email, phone, message } = request.query;
+    const {
+      name,
+      email,
+      phone,
+      message,
+      total,
+      service,
+      platforms,
+      features,
+      customFeatures,
+      users,
+      category,
+    } = request.query;
 
-    mailOptions = {
-      ...mailOptions,
-      to: 'aj_quindoza@yahoo.com',
-      subject: 'Message Received',
-      html: `
+    if (total) {
+      mailOptions = {
+        ...mailOptions,
+        to: 'aj_quindoza@yahoo.com',
+        subject: 'Estimate Received',
+        html: `
         <p style="font-size: 16px">From: ${name} </p>
         <p style="font-size: 16px">Email: ${email} </p>
         <p style="font-size: 16px">Phone Number: ${phone} </p>
         <p style="font-size: 16px">Message: ${message} </p>
       `,
-    };
-    transporter.sendMail(mailOptions, (error) => {
-      if (error) {
-        response.send(error);
-      } else {
-        response.send('Message sent successfully');
-      }
-    });
+      };
 
-    mailOptions = {
-      ...mailOptions,
-      to: email,
-      subject: 'We have received your message!',
-      html: `
+      transporter.sendMail(mailOptions, (error) => {
+        if (error) {
+          response.send(error);
+        } else {
+          response.send('Message sent successfully');
+        }
+      });
+    } else {
+      mailOptions = {
+        ...mailOptions,
+        to: 'aj_quindoza@yahoo.com',
+        subject: 'Message Received',
+        html: `
+        <p style="font-size: 16px">From: ${name} </p>
+        <p style="font-size: 16px">Email: ${email} </p>
+        <p style="font-size: 16px">Phone Number: ${phone} </p>
+        <p style="font-size: 16px">Message: ${message} </p>
+      `,
+      };
+
+      transporter.sendMail(mailOptions, (error) => {
+        if (error) {
+          response.send(error);
+        } else {
+          response.send('Message sent successfully');
+        }
+      });
+
+      mailOptions = {
+        ...mailOptions,
+        to: email,
+        subject: 'We have received your message!',
+        html: `
         <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html
   xmlns="http://www.w3.org/1999/xhtml"
@@ -607,7 +641,8 @@ exports.sendMail = functions.https.onRequest((request, response) => {
   </body>
 </html>
       `,
-    };
-    transporter.sendMail(mailOptions);
+      };
+      transporter.sendMail(mailOptions);
+    }
   });
 });
