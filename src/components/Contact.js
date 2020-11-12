@@ -401,6 +401,7 @@ const Contact = (props) => {
               id="message"
               fullWidth
               multiline
+              placeholder="Tell us more about your project"
               rows={10}
               onChange={(event) => setMessage(event.target.value)}
             />

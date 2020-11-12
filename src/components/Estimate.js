@@ -366,8 +366,6 @@ const Estimate = () => {
     backgroundColor: '',
   });
 
-  const [open, setOpen] = useState(false);
-
   const defaultOptions = {
     loop: true,
     autoplay: false,
@@ -657,24 +655,36 @@ const Estimate = () => {
       .filter((question) => question.length === 0);
 
     if (questions.length === 2) {
+      if (emptySelections.length === 1) {
+        disabled = false;
+      }
+    } else if (questions.length === 1) {
+      disabled = true;
+    } else if (
+      emptySelections.length < 3 &&
+      questions[questions.length - 1].options.filter(
+        (option) => option.selected
+      ).length > 0
+    ) {
+      disabled = false;
     }
 
-    console.log(emptySelections);
+    return disabled;
   };
 
   const softwareSelection = (
-    <Grid container direction='column'>
+    <Grid container direction="column">
       <Grid
         item
         container
-        alignItems='center'
+        alignItems="center"
         style={{ marginBottom: '1.25em' }}
       >
         <Grid item xs={2}>
-          <img src={check} alt='checkmark' />
+          <img src={check} alt="checkmark" />
         </Grid>
         <Grid item xs={10}>
-          <Typography variant='body1'>
+          <Typography variant="body1">
             You want {service}
             {platforms.length > 0
               ? ` for ${
@@ -709,14 +719,14 @@ const Estimate = () => {
       <Grid
         item
         container
-        alignItems='center'
+        alignItems="center"
         style={{ marginBottom: '1.25em' }}
       >
         <Grid item xs={2}>
-          <img src={check} alt='checkmark' />
+          <img src={check} alt="checkmark" />
         </Grid>
         <Grid item xs={10}>
-          <Typography variant='body1'>
+          <Typography variant="body1">
             {'with '}
             {/* if we have features... */}
             {features.length > 0
@@ -746,12 +756,12 @@ const Estimate = () => {
           </Typography>
         </Grid>
       </Grid>
-      <Grid item container alignItems='center'>
+      <Grid item container alignItems="center">
         <Grid item xs={2}>
-          <img src={check} alt='checkmark' />
+          <img src={check} alt="checkmark" />
         </Grid>
         <Grid item xs={10}>
-          <Typography variant='body1'>
+          <Typography variant="body1">
             The custom features will be of {customFeatures.toLowerCase()}
             {`, and the project will be used by about ${users} users.`}
           </Typography>
@@ -761,13 +771,13 @@ const Estimate = () => {
   );
 
   const websiteSelection = (
-    <Grid container direction='column' style={{ marginTop: '14em' }}>
-      <Grid item container alignItems='center'>
+    <Grid container direction="column" style={{ marginTop: '14em' }}>
+      <Grid item container alignItems="center">
         <Grid item xs={2}>
-          <img src={check} alt='checkmark' />
+          <img src={check} alt="checkmark" />
         </Grid>
         <Grid item xs={10}>
-          <Typography variant='body1'>
+          <Typography variant="body1">
             You want{' '}
             {category === 'Basic'
               ? 'a Basic Website.'
@@ -779,11 +789,11 @@ const Estimate = () => {
   );
 
   return (
-    <Grid container direction='row'>
+    <Grid container direction="row">
       <Grid
         item
         container
-        direction='column'
+        direction="column"
         lg
         alignItems={matchesMD ? 'center' : undefined}
       >
@@ -791,7 +801,7 @@ const Estimate = () => {
           item
           style={{ marginTop: '2em', marginLeft: matchesMD ? 0 : '5em' }}
         >
-          <Typography variant='h2' align={matchesMD ? 'center' : undefined}>
+          <Typography variant="h2" align={matchesMD ? 'center' : undefined}>
             Estimate
           </Typography>
         </Grid>
@@ -803,14 +813,14 @@ const Estimate = () => {
             marginTop: '7.5em',
           }}
         >
-          <Lottie options={defaultOptions} height='100%' width='100%' />
+          <Lottie options={defaultOptions} height="100%" width="100%" />
         </Grid>
       </Grid>
       <Grid
         item
         container
-        direction='column'
-        alignItems='center'
+        direction="column"
+        alignItems="center"
         lg
         style={{ marginRight: matchesMD ? 0 : '2em', marginBottom: '25em' }}
       >
@@ -820,8 +830,8 @@ const Estimate = () => {
             <Fragment key={index}>
               <Grid item>
                 <Typography
-                  variant='h2'
-                  align='center'
+                  variant="h2"
+                  align="center"
                   style={{
                     fontWeight: 500,
                     fontSize: '2.25rem',
@@ -834,8 +844,8 @@ const Estimate = () => {
                   {question.title}
                 </Typography>
                 <Typography
-                  variant='body1'
-                  align='center'
+                  variant="body1"
+                  align="center"
                   style={{ marginBottom: '2.5em' }}
                   gutterBottom
                 >
@@ -843,12 +853,13 @@ const Estimate = () => {
                 </Typography>
               </Grid>
               <Grid item container>
-                {question.options.map((option) => (
+                {question.options.map((option, index) => (
                   <Grid
                     item
                     container
-                    direction='column'
+                    direction="column"
                     md
+                    key={index}
                     component={Button}
                     onClick={() => handleSelect(option.id)}
                     disableRipple
@@ -864,13 +875,13 @@ const Estimate = () => {
                   >
                     <Grid item style={{ maxWidth: '14em' }}>
                       <Typography
-                        variant='h6'
-                        align='center'
+                        variant="h6"
+                        align="center"
                         style={{ marginBottom: '1em' }}
                       >
                         {option.title}
                       </Typography>
-                      <Typography variant='caption' align='center'>
+                      <Typography variant="caption" align="center">
                         {option.subtitle}
                       </Typography>
                     </Grid>
@@ -890,7 +901,7 @@ const Estimate = () => {
         <Grid
           item
           container
-          justify='space-between'
+          justify="space-between"
           style={{ width: '18em', marginTop: '3em' }}
         >
           <Grid item>
@@ -902,7 +913,7 @@ const Estimate = () => {
                 src={
                   navigationPreviousDisabled() ? backArrowDisabled : backArrow
                 }
-                alt='previous question'
+                alt="previous question"
               />
             </IconButton>
           </Grid>
@@ -915,14 +926,14 @@ const Estimate = () => {
                 src={
                   navigationNextDisabled() ? forwardArrowDisabled : forwardArrow
                 }
-                alt='next question'
+                alt="next question"
               />
             </IconButton>
           </Grid>
         </Grid>
         <Grid item>
           <Button
-            variant='contained'
+            variant="contained"
             className={classes.estimateButton}
             disabled={estimateDisabled()}
             onClick={() => {
@@ -942,13 +953,13 @@ const Estimate = () => {
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
         fullWidth
-        maxWidth='lg'
+        maxWidth="lg"
         fullScreen={matchesSM}
         style={{ zIndex: 1302 }}
       >
-        <Grid container justify='center'>
+        <Grid container justify="center">
           <Grid item style={{ marginTop: '1em', marginBottom: '1em' }}>
-            <Typography variant='h2' align='center'>
+            <Typography variant="h2" align="center">
               Estimate
             </Typography>
           </Grid>
@@ -956,21 +967,21 @@ const Estimate = () => {
         <DialogContent>
           <Grid
             container
-            justify='space-around'
+            justify="space-around"
             direction={matchesSM ? 'column' : 'row'}
             alignItems={matchesSM ? 'center' : undefined}
           >
             <Grid
               item
               container
-              direction='column'
+              direction="column"
               md={7}
               style={{ maxWidth: '20em' }}
             >
               <Grid item style={{ marginBottom: '0.5em' }}>
                 <TextField
-                  label='Name'
-                  id='name'
+                  label="Name"
+                  id="name"
                   fullWidth
                   value={name}
                   onChange={(event) => setName(event.target.value)}
@@ -978,10 +989,10 @@ const Estimate = () => {
               </Grid>
               <Grid item style={{ marginBottom: '0.5em' }}>
                 <TextField
-                  label='Email'
+                  label="Email"
                   error={emailHelper.length !== 0}
                   helperText={emailHelper}
-                  id='email'
+                  id="email"
                   fullWidth
                   value={email}
                   onChange={onChange}
@@ -989,10 +1000,10 @@ const Estimate = () => {
               </Grid>
               <Grid item style={{ marginBottom: '0.5em' }}>
                 <TextField
-                  label='Phone'
+                  label="Phone"
                   error={phoneHelper.length !== 0}
                   helperText={phoneHelper}
-                  id='phone'
+                  id="phone"
                   fullWidth
                   value={phone}
                   onChange={onChange}
@@ -1003,18 +1014,20 @@ const Estimate = () => {
                   InputProps={{ disableUnderline: true }}
                   value={message}
                   className={classes.message}
-                  id='message'
+                  id="message"
                   fullWidth
                   multiline
+                  placeholder="Tell us more about your project"
                   rows={10}
                   onChange={(event) => setMessage(event.target.value)}
                 />
               </Grid>
               <Grid item>
                 <Typography
-                  variant='body1'
+                  variant="body1"
                   paragraph
                   align={matchesSM ? 'center' : undefined}
+                  style={{ lineHeight: 1.25 }}
                 >
                   We can create this digital solution for an estimated{' '}
                   <span className={classes.specialText}>
@@ -1022,7 +1035,7 @@ const Estimate = () => {
                   </span>
                 </Typography>
                 <Typography
-                  variant='body1'
+                  variant="body1"
                   paragraph
                   align={matchesSM ? 'center' : undefined}
                 >
@@ -1035,7 +1048,7 @@ const Estimate = () => {
             <Grid
               item
               container
-              direction='column'
+              direction="column"
               md={5}
               style={{ maxWidth: '30em' }}
               alignItems={matchesSM ? 'center' : undefined}
@@ -1048,9 +1061,15 @@ const Estimate = () => {
 
               <Grid item>
                 <Button
-                  variant='contained'
+                  variant="contained"
                   className={classes.estimateButton}
                   onClick={sendEstimate}
+                  disabled={
+                    name.length === 0 ||
+                    message.length === 0 ||
+                    phoneHelper.length !== 0 ||
+                    emailHelper.length !== 0
+                  }
                 >
                   {loading ? (
                     <CircularProgress />
@@ -1059,7 +1078,7 @@ const Estimate = () => {
                       Place Request
                       <img
                         src={send}
-                        alt='paper airplane'
+                        alt="paper airplane"
                         style={{ marginLeft: '0.5 em' }}
                       />
                     </>
@@ -1070,7 +1089,7 @@ const Estimate = () => {
                 <Grid item style={{ marginBottom: matchesSM ? '5em' : 0 }}>
                   <Button
                     style={{ fontWeight: 300 }}
-                    color='primary'
+                    color="primary"
                     onClick={() => setDialogOpen(false)}
                   >
                     Cancel
